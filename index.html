@@ -16,7 +16,7 @@
     </div>
     <div class="container">
       
-      <div class="btn-group drop_menu">
+      <div class="btn-group drop_menu" style="z-index: 1000;">
         <button type="button" class="btn btn-secondary dropdown-toggle btn_user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-user fa"></i><span style="margin-left: 10px;">DANIEL</span>
         </button>
@@ -27,7 +27,7 @@
           <button class="dropdown-item" type="button"><i class="fas fa-sign-out-alt"></i><span style="margin-left: 10px;">Sair</span></button>
         </div>
       </div>
-      <section class="body-application">
+      <section class="body-application" style="z-index: 1000;">
         <!-- navbar superior -->
         <header>
           <nav>
@@ -38,7 +38,7 @@
 
       </section>
 
-      <i class="fas fa-2x fa-bars menu_i" style="color: #ffffff;"></i>
+      <i class="fas fa-2x fa-bars menu_i" style="color: #ffffff; z-index: 1000;"></i>
       <!-- sidenav lateral -->
       <div class="side">
         
@@ -53,7 +53,15 @@
           </li>
           <li class="rotas">
             <i class="fas fa-route fa-2x"></i>
-            <span>Rotas</span>
+            <span>Centro de Distribuição</span>
+          </li>
+          <li class="usuario">
+            <i class="fas fa-users fa-2x"></i>
+            <span>Usuário</span>
+          </li>
+          <li class="veiculo">
+            <i class="fas fa-truck-moving fa-2x"></i>
+            <span>Veículos</span>
           </li>
           <li class="gerencia">
             <i class="fas fa-edit fa-2x"></i>
@@ -182,6 +190,66 @@
           </div>
         </div>
         <div class="rotas-body">
+          <form class="row" style="width: 100%;">
+            <div class="form-group col-md-6">
+              <input type="text" class="form-control col-md-12" id="pesquisa-unidade" placeholder="Unidade" value="CTE GV">
+            </div>
+            <div class="form-group col-md-6">
+              <input type="text" class="form-control col-md-12" id="pesquisa-cidade" placeholder="Cidade" value="Governador Valadares">
+            </div>
+          </form>
+          <div class="row" style="width: 100%;">
+            <div class="resultados-unidade col-md-12">
+              <div class="row">
+                <div class="col-md-6" style="margin-bottom: 120px;">
+                  <h3>Endereço</h3>
+                  <div>
+                    <small>Rua:</small>
+                    <p>Rua Nicolau José</p>
+                  </div>
+                  <div>
+                    <small>Número:</small>
+                    <p>1083</p>
+                  </div>
+                  <div>
+                    <small>Bairro:</small>
+                    <p>Centro</p>
+                  </div>
+                  <div>
+                    <small>Cidade:</small>
+                    <p>Governador Valadares / MG</p>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <h3>Localização</h3>
+                  <div class="mapa" style="height: 100%;">
+
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <h3>Pacotes</h3>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <small>Recebidos:</small>
+                      <h1 style="font-size: 50px;">133</h1>
+                    </div>
+                    <div class="col-md-4">
+                      <small>Despachados:</small>
+                      <h1 style="font-size: 50px;">100</h1>
+                    </div>
+                    <div class="col-md-4">
+                      <small>Em entrega:</small>
+                      <h1 style="font-size: 50px;">33</h1>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="usuario-body">
+        </div>
+        <div class="veiculo-body">
         </div>
         <div class="gerencia-body">
         </div>

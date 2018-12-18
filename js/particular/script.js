@@ -35,6 +35,14 @@ $.Geral.events = function(){
       $('.gerencia-body').show();
       $('.gerencia').addClass('selected');
     }
+    else if($(this).hasClass('veiculo')){
+      $('.veiculo-body').show();
+      $('.veiculo').addClass('selected');
+    }
+    else if($(this).hasClass('usuario')){
+      $('.usuario-body').show();
+      $('.usuario').addClass('selected');
+    }
   });
 
   $('body').on('click', '.filtro_produto', function(ev){

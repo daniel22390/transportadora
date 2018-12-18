@@ -15,9 +15,15 @@ body{
   z-index: 999;
 }
 
+.rotas-body{
+  padding-top: 5px;
+  
+}
+
 .side{
   height: 100vh;
   position: fixed;
+  z-index: 999;
 }
 
 header{
