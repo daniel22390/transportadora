@@ -161,9 +161,16 @@ header h5{
 .sidenav.toggle-class:hover li span, .sidenav.notoggle-class li span{
   display: initial;
   position: absolute;
-  left: 55px;
+  left: 60px;
 }
 
+tbody tr{
+  cursor: pointer;
+}
+
+/* .sidenav span{
+  margin-top: 2px;
+}  */
 
 
 /* Small devices (landscape phones, 576px and up) */
@@ -178,7 +185,9 @@ header h5{
 
 /* // Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
-
+  .modal-lg {
+    max-width: 80%;
+  }
 }
 
 /* // Extra large devices (large desktops, 1200px and up) */

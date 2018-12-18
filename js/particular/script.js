@@ -58,4 +58,11 @@ $.Geral.events = function(){
 
 $(document).ready(function(){
   $.Geral.events();
+  $.Distribuidora.events();
+  $.Produto.events();
 });
+
+function initMapDistribuidora(){
+  $.Distribuidora.ativaMapa();
+  $.Produto.ativaMapa();
+}
