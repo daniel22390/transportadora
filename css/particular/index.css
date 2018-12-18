@@ -1,0 +1,183 @@
+body{
+    background-color: #eeeeee;
+    font-family: Poppins,sans-serif;
+}
+
+.container{
+  padding: 0px;
+  max-width: 100%;
+}
+
+.menu_i{
+  cursor: pointer;
+  margin-left: 5px;
+  margin-top: 10px;
+  z-index: 999;
+}
+
+.side{
+  height: 100vh;
+  position: fixed;
+}
+
+header{
+  margin-top: 10px;
+  padding-left: 10px;
+}
+
+.sidenav.toggle-class:hover, .sidenav.notoggle-class{
+  width: 180px;
+}
+
+.body-application{
+  padding-left: 70px;
+  position: absolute;
+}
+
+header h5{
+    margin-top: 23px;
+}
+
+.side a{
+  color: #ffffff;
+}
+
+.side li{
+  cursor: pointer;
+}
+
+.sidenav > li.selected{
+  background-color: #0c072c;
+}
+
+.content-elements > div{
+  display: none;
+  height: calc(100vh - 70px);
+  width: 100%;
+  overflow: auto;
+}
+
+.content-elements > .home-body{
+  display: block;
+}
+
+.side li:hover{
+  background-color: #0c072c;
+}
+.acoes i{
+    cursor: pointer;
+}
+
+.add_produto, .filtro_produto{
+    right: 10px;
+    position: absolute;
+    bottom: 4vh;
+    background-color: #27293d;
+    color: #ffffff;
+}
+
+.pesquisa td{
+    padding: .1rem .75rem;
+}
+
+.filtro_produto{
+    right: 60px;
+}
+
+.pagination a{
+    color: #27293d;
+}
+
+.content-elements{
+  padding-left: 70px;
+  padding-top: 70px;
+}
+
+.drop_menu{
+  position: absolute;
+  top: 15px;
+  right: 10px;
+}
+
+.btn_user{
+  background-color: #0c072c;
+}
+
+.header{
+    position: absolute;
+    height: 70px;
+    width: 100%;
+    background-color: #27293d;
+}
+
+.menu_i{
+    position: absolute;
+    top: 10px;
+    left: 10px;;
+}
+
+.sidenav{
+  width: 60px;
+  height: 100vh;
+  background: #27293d;
+  padding-left: 0px;
+  padding-right: 0px;
+  text-align: center;  
+  transition: width .2s;
+  -webkit-transition: width .2s; /* For Safari 3.1 to 6.0 */
+  margin-top: 70px;
+}
+
+.sidenav.toggle-class:hover, .sidenav.notoggle-class{
+  text-align: initial;
+}
+
+.sidenav.toggle-class:hover li, .sidenav.notoggle-class li{
+  text-align: initial;
+  display: block;
+}
+
+.sidenav li{
+  list-style-type: none;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #fff !important;
+  display: inline-block;
+  width: 100%;
+}
+
+.side li span{
+  display: none;
+}
+
+.sidenav.toggle-class:hover li span, .sidenav.notoggle-class li span{
+  display: initial;
+  position: absolute;
+  left: 55px;
+}
+
+
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+
+}
+
+/* // Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+
+}
+
+/* // Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+
+}
+
+/* // Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { 
+  .container{
+    max-width: calc(100%);
+  }
+}
