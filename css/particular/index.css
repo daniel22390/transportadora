@@ -172,6 +172,15 @@ tbody tr{
   margin-top: 2px;
 }  */
 
+.modal-header{
+  background-color: #0c072c;
+  color: #ffffff;
+}
+
+.modal-header span{
+  color: #ffffff;
+}
+
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
