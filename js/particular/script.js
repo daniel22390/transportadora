@@ -1,6 +1,8 @@
 $.Geral = {};
 
 $.Geral.events = function(){
+  $('.dropdown-toggle').dropdown();
+  
   $(".menu_i").click(function(){
     if($('.sidenav').hasClass('toggle-class')){
       $(".sidenav").removeClass('toggle-class');

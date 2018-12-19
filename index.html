@@ -18,11 +18,11 @@
     </div>
     <div class="container">
       
-      <div class="btn-group drop_menu" style="z-index: 1000;">
-        <button type="button" class="btn btn-secondary dropdown-toggle btn_user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <div class="btn-group drop_menu" id="dropdown" style="z-index: 1000;">
+        <button type="button" id="btn_user" class="btn btn-secondary dropdown-toggle btn_user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-user fa"></i><span style="margin-left: 10px;">DANIEL</span>
         </button>
-        <div class="dropdown-menu dropdown-menu-right">
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btn_user">
           <button class="dropdown-item" type="button"><i class="fas fa-cog fa"></i><span style="margin-left: 10px;">Configurações</span></button>
           <button class="dropdown-item" type="button"><i class="fas fa-user-circle"></i><span style="margin-left: 10px;">Conta</span></button>
           <div class="dropdown-divider"></div>
@@ -354,7 +354,7 @@
         <div class="modal-content">
           <form>
             <div class="modal-header">
-              <h5 class="modal-title" id="visualizarProduto"></h5>
+              <h5 class="modal-title" id="visualizarProduto">Informações do pacote</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -480,6 +480,7 @@
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="./js/jquery-3.3.1.min.js" ></script>
+    <script src="./js/popper.min.js" ></script>
     <script src="./js/bootstrap.min.js" ></script>
     <script src="./js/particular/produto.js" ></script>
     <script src="./js/particular/distribuidora.js" ></script>
