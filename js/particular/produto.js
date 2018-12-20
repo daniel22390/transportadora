@@ -3,8 +3,11 @@ $.Produto = {};
 $.Produto = {
   events: function(){
     
+    $('body').on('click', '.pacotes-body .acoes i', function(ev){
+      ev.stopPropagation();
+    });
 
-    $('body').on('click', 'tbody tr', function(){
+    $('body').on('click', '.table-altera tbody tr', function(){
       $('#id_altera').val($(this).find('th').text());
       $('#origem_altera').val($(this).find('td:nth-child(3)').text());
       $('#destino_altera').val($(this).find('td:nth-child(2)').text());
@@ -12,6 +15,29 @@ $.Produto = {
       $('#local_altera').val($(this).find('td:nth-child(5)').text());
       $('#modalViewProduto').modal();
       $('#modalViewProduto').modal('show');
+    });
+
+    $('body').on('click', '.add_produto', function(){
+      $('#modalInsereProduto').modal();
+      $('#modalInsereProduto').modal('show');
+      $('#modalInsereProduto').on('hidden.bs.modal', function (e) {
+        $('.tabela-add tbody').html('<tr class="insere-add"><th scope="row">#</th><td><input type="text" class="form-control input-insere"></td><td class="text-center"><i class="fas fa-save insere-ctd fa-2x"></i></td></tr>');
+      })
+    });
+
+    $('body').on('click', '.insere-ctd', function(){
+      var linha = '<tr><th scope="row">'+ ($('.tabela-add tbody tr').length) +'</th><td>'+ $('.input-insere').val() +'</td><td class="text-center"><i class="fas fa-trash-alt fa-2x exclui-ctd"></i></td></tr>';
+      $('.insere-add').before(linha);
+      $('.input-insere').val('');
+    });
+
+    $('body').on('click', '.exclui-ctd', function(){
+      $(this).parent().parent().remove();
+      $.each($('.tabela-add tbody tr'), function(k, v){
+        if(k !== ($('.tabela-add tbody tr').length - 1)){
+          $(v).find('th').text(k + 1);
+        }
+      });
     });
   },
 

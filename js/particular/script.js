@@ -49,7 +49,7 @@ $.Geral.events = function(){
 
   $('body').on('click', '.filtro_produto', function(ev){
     $('.pesquisa').remove();
-    $('table tbody').prepend('<tr class="pesquisa"><td><input type="number" class="form-control"></td><td><input type="text" class="form-control"></td><td><input type="text" class="form-control"></td><td><input type="text" class="form-control"></td><td><input type="text" class="form-control"></td><td><input type="text" class="form-control"></td><td><input type="text" class="form-control"></td></tr>');
+    $('.table-altera tbody').prepend('<tr class="pesquisa"><td><input type="number" class="form-control"></td><td><input type="text" class="form-control"></td><td><input type="text" class="form-control"></td><td><input type="text" class="form-control"></td><td><input type="text" class="form-control"></td><td><input type="text" class="form-control"></td><td><input type="text" class="form-control"></td></tr>');
   });
   $('body').on('click', function(ev){
     if(!$(event.target).closest('.pesquisa').length && !$(event.target).closest('.filtro_produto').length) {

@@ -20,6 +20,10 @@ body{
   
 }
 
+.sidenav > li > span{
+  margin-top: 5px;
+}
+
 .side{
   height: 100vh;
   position: fixed;
@@ -77,7 +81,7 @@ header h5{
 .add_produto, .filtro_produto{
     right: 10px;
     position: absolute;
-    bottom: 4vh;
+    bottom: 20px;
     background-color: #27293d;
     color: #ffffff;
 }
@@ -172,10 +176,10 @@ tbody tr{
   margin-top: 2px;
 }  */
 
-.modal-header{
+/* .modal-header{
   background-color: #0c072c;
   color: #ffffff;
-}
+} */
 
 .modal-header span{
   color: #ffffff;
