@@ -16,6 +16,11 @@
   left: 50%;
   margin-left: -1.5px;
 }
+.timeline-veiculo{
+  font-size: 13px;
+  margin-bottom: 0;
+  color: #222222;
+}
 .timeline .timeline-item {
   margin-bottom: 20px;
   position: relative;
@@ -101,6 +106,7 @@
 }
 .timeline .timeline-item .timeline-panel .timeline-title {
   margin-top: 0;
+  margin-bottom: 0;
   color: inherit;
   font-size: 20px;
 }

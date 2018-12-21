@@ -1,0 +1,19 @@
+.info-card{
+    text-align: right;
+    margin-top: 13px;
+}
+.numero-card{
+    font-size: 50px;
+    margin-bottom: 0;
+}
+.nome-card{
+    color: #777777;
+    font-size: 17px;
+}
+.body-home{
+    padding: .6rem;
+}
+.icon-card{
+    float: left;
+    margin-bottom: 25px;
+}

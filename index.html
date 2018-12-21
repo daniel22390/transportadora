@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./css/particular/index.css">
     <link rel="stylesheet" href="./css/particular/produto.css">
     <link rel="stylesheet" href="./css/particular/distribuidora.css">
+    <link rel="stylesheet" href="./css/particular/home.css">
     <title>TRANSPORTE | HOME</title>
   </head>
   <body>
@@ -75,6 +76,60 @@
 
       <div class="content-elements">
         <div class="home-body">
+          <div class="row" style="width: 100%;">
+            <div class="col-md-3">
+              <div class="card">
+                <div class="card-content">
+                  <div class="card-body body-home">
+                    <div class="icon-card text-success"><i class="far fa-check-circle fa-7x"></i></div>
+                    <div class="info-card">
+                      <h1 class="numero-card text-success"><b>117</b></h1>
+                      <h5 class="nome-card">Entregas</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>  
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <div class="card-content">
+                  <div class="card-body body-home">
+                    <div class="icon-card text-primary"><i class="far fa-question-circle fa-7x"></i></div>
+                    <div class="info-card">
+                      <h1 class="numero-card text-primary"><b>15</b></h1>
+                      <h5 class="nome-card">Pendentes</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>  
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <div class="card-content">
+                  <div class="card-body body-home">
+                    <div class="icon-card text-warning"><i class="far fa-clock fa-7x"></i></div>
+                    <div class="info-card">
+                      <h1 class="numero-card text-warning"><b>3</b></h1>
+                      <h5 class="nome-card">Atraso</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>  
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <div class="card-content">
+                  <div class="card-body body-home">
+                    <div class="icon-card text-danger"><i class="far fa-times-circle fa-7x"></i></div>
+                    <div class="info-card">
+                      <h1 class="numero-card text-danger"><b>5</b></h1>
+                      <h5 class="nome-card">Cancelados</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>  
+            </div>
+          </div>
         </div>
         <div class="pacotes-body">
           <div style='height: 90%; overflow-y: AUTO;'>
@@ -262,7 +317,11 @@
         <div class="rotas-body">
           <form class="row" style="width: 100%;">
             <div class="form-group col-md-6">
-              <input type="text" class="form-control col-md-12" id="pesquisa-unidade" placeholder="Unidade" value="CTE GV">
+              <select class="custom-select">
+                <option value="CTD GV">CTD GV</option>
+                <option value="CTD BH">CTD BH</option>
+                <option value="CTD Ipatinga">CTD Ipatinga</option>
+              </select>
             </div>
             <div class="form-group col-md-6">
               <input type="text" class="form-control col-md-12" id="pesquisa-cidade" placeholder="Cidade" value="Governador Valadares">
@@ -388,7 +447,7 @@
 
     <!-- Modal -->
     <div class="modal fade bd-example-modal-lg" id="modalViewProduto" tabindex="-1" role="dialog" aria-labelledby="visualizarProduto" aria-hidden="true">
-      <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
           <form>
             <div class="modal-header">
@@ -411,15 +470,11 @@
                   <label for="destino_altera">Destino</label>
                   <input type="text" class="form-control" id="destino_altera" placeholder="Destino">
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-6">
                   <label for="status_altera">Status</label>
                   <input type="text" class="form-control" id="status_altera" placeholder="Status">
                 </div>
-                <div class="form-group col-md-4">
-                  <label for="local_altera">Local atual</label>
-                  <input type="text" class="form-control" id="local_altera" placeholder="Local atual">
-                </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-6">
                   <label for="prioridade_altera">Prioridade</label>
                   <input type="text" class="form-control" id="prioridade_altera" placeholder="Prioridade">
                 </div>
@@ -432,6 +487,7 @@
                       <div class="timeline-panel">
                         <div class="timeline-heading">
                           <h4 class="timeline-title">CTD BH</h4>
+                          <h5 class="timeline-veiculo">Veículo 1 - Rafael Santos</h5>
                           <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 14/12/2018 13:30</small></p>
                         </div>
                         <div class="timeline-body">
@@ -444,6 +500,7 @@
                       <div class="timeline-panel">
                         <div class="timeline-heading">
                           <h4 class="timeline-title">CTD BH</h4>
+                          <h5 class="timeline-veiculo">Veículo 2 - Marcos Antônio</h5>
                           <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i>14/12/2018 16:30</small></p>
                         </div>
                         <div class="timeline-body">
@@ -456,6 +513,7 @@
                       <div class="timeline-panel">
                         <div class="timeline-heading">
                           <h4 class="timeline-title">CTD Ipatinga</h4>
+                          <h5 class="timeline-veiculo">Veículo 3 - Carlos José</h5>
                           <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i>15/12/2018 11:00</small></p>
                         </div>
                         <div class="timeline-body">
@@ -468,6 +526,7 @@
                       <div class="timeline-panel">
                         <div class="timeline-heading">
                           <h4 class="timeline-title">CTD Ipatinga</h4>
+                          <h5 class="timeline-veiculo">Veículo 3 - Carlos José</h5>
                           <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i>15/12/2018 17:00</small></p>
                         </div>
                         <div class="timeline-body">
@@ -480,6 +539,7 @@
                       <div class="timeline-panel">
                         <div class="timeline-heading">
                           <h4 class="timeline-title">CTD GV</h4>
+                          <h5 class="timeline-veiculo">Veículo 3 - Carlos José</h5>
                           <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i>16/12/2018 09:00</small></p>
                         </div>
                         <div class="timeline-body">
@@ -492,6 +552,7 @@
                       <div class="timeline-panel">
                         <div class="timeline-heading">
                           <h4 class="timeline-title">CTD GV</h4>
+                          <h5 class="timeline-veiculo">Veículo 3 - Carlos José</h5>
                           <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i>17/12/2018 11:00</small></p>
                         </div>
                         <div class="timeline-body">
@@ -515,7 +576,7 @@
 
     <!-- Modal -->
     <div class="modal fade bd-example-modal-lg" id="modalInsereProduto" tabindex="-1" role="dialog" aria-labelledby="inserirProduto" aria-hidden="true">
-      <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
           <form>
             <div class="modal-header">
@@ -538,33 +599,41 @@
                   <label for="destino_insere">Destino</label>
                   <input type="text" class="form-control" id="destino_insere" placeholder="Destino">
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-6">
                   <label for="status_insere">Status</label>
                   <input type="text" class="form-control" id="status_insere" placeholder="Status">
                 </div>
-                <div class="form-group col-md-4">
-                  <label for="local_insere">Local atual</label>
-                  <input type="text" class="form-control" id="local_insere" placeholder="Local atual">
-                </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-6">
                   <label for="prioridade_insere">Prioridade</label>
                   <input type="text" class="form-control" id="prioridade_insere" placeholder="Prioridade">
                 </div>
               </div>
               <h3 class="text-center" style="margin-top: 10px;">Trajeto</h3>
               <div style="max-height: 40vh; overflow-y: auto;">
-                <table class="table tabela-add">
+                <table class="table tabela-add table-striped">
                   <thead>
                     <tr>
                       <th scope="col">Posição</th>
                       <th scope="col">CTD</th>
+                      <th scope="col">Veículo</th>
                       <th scope="col" class="text-center">Ação</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr class="insere-add">
                       <th scope="row">#</th>
-                      <td><input type="text" class="form-control input-insere"></td>
+                      <td><select class="custom-select input-insere">
+                        <option selected>Selecione</option>
+                        <option value="CTD BH">CTD BH</option>
+                        <option value="CTD GV">CTD GV</option>
+                        <option value="CTD Ipatinga">CTD Ipatinga</option>
+                      </select></td>
+                      <td><select class="custom-select input-insere-veiculo">
+                        <option selected>Selecione</option>
+                        <option value="Veículo 1">Veículo 1</option>
+                        <option value="Veículo 2">Veículo 2</option>
+                        <option value="Veículo 3">Veículo 3</option>
+                      </select></td>
                       <td class="text-center"><i class="fas fa-save insere-ctd fa-2x"></i></td>
                     </tr>
                   </tbody>
