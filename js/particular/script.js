@@ -62,9 +62,11 @@ $(document).ready(function(){
   $.Geral.events();
   $.Distribuidora.events();
   $.Produto.events();
+  $.Home.events();
 });
 
 function initMapDistribuidora(){
   $.Distribuidora.ativaMapa();
   $.Produto.ativaMapa();
+  $.Home.criaMapa();
 }
