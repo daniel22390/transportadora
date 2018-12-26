@@ -18,6 +18,10 @@ $.Geral.events = function(){
     }
   });
 
+  $('body').on('click', '.conta', function(ev){
+    $('.usuario').trigger('click');
+  });
+
   $('body').on('click', '.side li', function(ev){
     $('.content-elements > div').hide();
     $('.sidenav > li').removeClass("selected");
