@@ -31,3 +31,15 @@
 .toppad
 {margin-top:20px;
 }
+
+.table-veiculos-usuario{
+    height: 369px;
+}
+
+.btn-add-veiculo{
+    background-color: #27293d;
+    color: #ffffff;
+    position: absolute;
+    right: 25px;
+    bottom: 25px;
+}

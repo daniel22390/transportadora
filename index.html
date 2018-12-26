@@ -513,7 +513,7 @@
         </div>
         <div class="usuario-body">
           <div class="row" style="width: 100%;">
-            <div class="col-md-6">
+            <div class="col-sm-12 col-lg-6">
               <div class="card">
                 <div class="card-content">
                   <div class="card-header-blue">
@@ -521,38 +521,90 @@
                   </div>
                   <div class="card-body">
                     <div class="row">
-                      <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" width="90" src="./img/user.png" class="img-circle img-responsive"> </div>
+                      <div class="col-md-3 col-lg-3 " align="center"> 
+                        <img style="margin-bottom: 20px;" alt="User Pic" width="90" src="./img/user.png" class="img-circle img-responsive"> 
+                      </div>
                       
                       <div class=" col-md-9 col-lg-9 "> 
-                        <table class="table table-user-information">
-                          <tbody>
-                            <tr>
-                              <td>Nome:</td>
-                              <td>Daniel Gomes de Oliveira</td>
-                            </tr>
-                            <tr>
-                              <td>Cargo:</td>
-                              <td>Motorista</td>
-                            </tr>
-                            <tr>
-                              <td>Nascimento:</td>
-                              <td>24/01/1988</td>
-                            </tr>
-                            <tr>
-                              <td>Usuário:</td>
-                              <td>daniel_gomes</td>
-                            </tr>
-                            <tr>
-                              <td>Email:</td>
-                              <td><a href="mailto:info@support.com">daniel@hotmail.com</a></td>
-                            </tr>
-                              <td>Telefone:</td>
-                              <td>(33) 999999999</td>   
-                            </tr>
-                          </tbody>
-                        </table>
+                        <div>
+                          <small>Nome:</small>
+                          <p>Daniel Gomes de Oliveira</p>
+                        </div>
+                        <div>
+                          <small>Cargo:</small>
+                          <p>Motorista</p>
+                        </div>
+                        <div>
+                          <small>Nascimento:</small>
+                          <p>24/01/1988</p>
+                        </div>
+                        <div>
+                          <small>Usuário:</small>
+                          <p>daniel_gomes</p>
+                        </div>
+                        <div>
+                          <small>Email:</small>
+                          <p><a href="mailto:info@support.com">daniel@hotmail.com</a></p>
+                        </div>
+                        <div>
+                          <small>Telefone:</small>
+                          <p>(33) 999999999</p>   
+                        </div>
                       </div>
                     </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-lg-6">
+              <div class="card">
+                <div class="card-content">
+                  <div class="card-header-blue">
+                    <h1 class="card-heading">Meus Veículos</h1>
+                  </div>
+                  <div class="card-body ">
+                    <table class="table table-veiculos-usuario">
+                      <thead>
+                        <tr>
+                          <th scope="col">Imagem</th>
+                          <th scope="col">Marca</th>
+                          <th scope="col">Modelo</th>
+                          <th scope="col">Capacidade</th>
+                          <th scope="col">Ação</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td><img src="./img/scania.jpg" width="120" height="120"></td>
+                          <td>Scania</td>
+                          <td>G-400 6x2</td>
+                          <td>3 toneladas</td>
+                          <td><i class="fas fa-trash-alt text-danger"></i></td>
+                        </tr>
+                        <tr>
+                          <td><img src="./img/scania2.jpg" width="150" height="120"></td>
+                          <td>Scania</td>
+                          <td>G380</td>
+                          <td>3.5 toneladas</td>
+                          <td><i class="fas fa-trash-alt text-danger"></i></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <button type="button" class="btn btn-add-veiculo">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-content">
+                  <div class="card-header-blue">
+                    <h1 class="card-heading">Último Check-in</h1>
+                  </div>
+                  <div class="card-body">
+                    <div style="width: 100%; height: 200px;" id="mapa_checkin"></div>
                   </div>
                 </div>
               </div>
@@ -780,6 +832,7 @@
     <script src="./js/particular/produto.js" ></script>
     <script src="./js/particular/distribuidora.js" ></script>
     <script src="./js/particular/home.js" ></script>
+    <script src="./js/particular/usuario.js" ></script>
     <script src="./js/particular/script.js" ></script>
     <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBf99O-EBGCFO6eM_YT1v6TzYeizhwuQVQ&callback=initMapDistribuidora">

@@ -72,5 +72,6 @@ $(document).ready(function(){
 function initMapDistribuidora(){
   $.Distribuidora.ativaMapa();
   $.Produto.ativaMapa();
+  $.Usuario.ativaMapa();
   $.Home.criaMapa();
 }
