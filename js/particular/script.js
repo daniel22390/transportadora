@@ -7,10 +7,14 @@ $.Geral.events = function(){
     if($('.sidenav').hasClass('toggle-class')){
       $(".sidenav").removeClass('toggle-class');
       $(".sidenav").addClass('notoggle-class');
+      $('.content-elements').addClass('notoggle-class');
+      $('.content-elements').removeClass('toggle-class');
       $('.content-elements > div').css('width', "calc(100% - 120px)");
       $('.content-elements > div').css('marginLeft', "120px");
     }
     else{
+      $('.content-elements').removeClass('notoggle-class');
+      $('.content-elements').addClass('toggle-class');
       $(".sidenav").addClass('toggle-class');
       $(".sidenav").removeClass('notoggle-class');
       $('.content-elements > div').css('width', "100%");
