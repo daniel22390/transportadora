@@ -81,7 +81,7 @@ header h5{
     cursor: pointer;
 }
 
-.add_produto, .filtro_produto{
+.add_produto, .filtro_produto, .add_veiculo, .filtro_veiculo{
     right: 10px;
     position: absolute;
     bottom: 20px;
@@ -93,7 +93,7 @@ header h5{
     padding: .1rem .75rem;
 }
 
-.filtro_produto{
+.filtro_produto, .filtro_veiculo{
     right: 60px;
 }
 
@@ -188,6 +188,11 @@ tbody tr{
   color: #ffffff;
 }
 
+.content-elements > div > .row{
+  margin: 0;  
+}
+
+
 .drop_menu .dropdown-item{
   cursor: pointer;
 }
@@ -207,6 +212,23 @@ tbody tr{
 @media (min-width: 992px) {
   .modal-lg {
     max-width: 80%;
+  }
+}
+
+@media (max-width: 991px) {
+  .sidenav {
+    width: 60px !important;
+    overflow: hidden;
+  }
+  .sidenav > li > span{
+    display: none !important;
+  }
+  .content-elements > div{
+    width: 100% !important;
+    margin-left: 0px !important;
+  }
+  .menu_i{
+    display: none;
   }
 }
 

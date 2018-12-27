@@ -612,6 +612,43 @@
           </div>
         </div>
         <div class="veiculo-body">
+          <div style='height: 90%; overflow-y: AUTO;'>
+            <table class="table table-striped table-veiculos">
+              <thead>
+                <tr>
+                  <th scope="col" class="text-center">Imagem</th>
+                  <th scope="col">ID</th>
+                  <th scope="col">Marca</th>
+                  <th scope="col">Modelo</th>
+                  <th scope="col">Capacidade</th>
+                  <th scope="col">Rodagem</th>
+                  <th scope="col" class=" text-center">Ação</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-center"><img src="./img/scania.jpg" width="120" height="120"></td>
+                  <td>1</td>
+                  <td>Scania</td>
+                  <td>G-400 6x2</td>
+                  <td>3 toneladas</td>
+                  <td>100.000km</td>
+                  <td class="text-center"><i class="fas fa-trash-alt text-danger"></i></td>
+                </tr>
+                <tr>
+                  <td class="text-center"><img src="./img/scania2.jpg" width="150" height="120"></td>
+                  <td>2</td>
+                  <td>Scania</td>
+                  <td>G380</td>
+                  <td>3.5 toneladas</td>
+                  <td>134.000km</td>
+                  <td class="text-center"><i class="fas fa-trash-alt text-danger"></i></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <button type="button" class="btn filtro_veiculo "><i class="fas fa-filter"></i></button>
+          <button type="button" class="btn add_veiculo "><i class="fas fa-plus"></i></button>
         </div>
         <div class="gerencia-body">
         </div>
@@ -747,6 +784,52 @@
       </div>
     </div>
 
+     <!-- Modal -->
+     <div class="modal fade bd-example-modal-lg" id="modalViewVeiculo" tabindex="-1" role="dialog" aria-labelledby="visualizarVeiculo" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <form>
+              <div class="modal-header">
+                <h5 class="modal-title" id="visualizarVeiculo">Informações do veículo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="form-row">
+                  <div class="form-group col-md-2">
+                    <label for="id_altera_veiculo">ID</label>
+                    <input disabled type="text" class="form-control" id="id_altera_veiculo">
+                  </div>
+                  <div class="form-group col-md-5">
+                    <label for="marca_altera_veiculo">Marca</label>
+                    <input type="text" class="form-control" id="marca_altera_veiculo" placeholder="Marca">
+                  </div>
+                  <div class="form-group col-md-5">
+                    <label for="modelo_altera_veiculo">Modelo</label>
+                    <input type="text" class="form-control" id="modelo_altera_veiculo" placeholder="Modelo">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="capacidade_altera_veiculo">Capacidade</label>
+                    <input type="text" class="form-control" id="capacidade_altera_veiculo" placeholder="Capacidade">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="rodagem_altera_veiculo">Rodagem</label>
+                    <input type="text" class="form-control" id="rodagem_altera_veiculo" placeholder="Rodagem">
+                  </div>
+                </div>
+                <h3 class="text-center" style="margin-top: 10px;">Último check-in</h3>
+                <div style="width: 100%; height: 350px;" id="mapa_altera_veiculo"></div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary">Salvar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
     <!-- Modal -->
     <div class="modal fade bd-example-modal-lg" id="modalInsereProduto" tabindex="-1" role="dialog" aria-labelledby="inserirProduto" aria-hidden="true">
       <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -760,15 +843,11 @@
             </div>
             <div class="modal-body">
               <div class="form-row">
-                <div class="form-group col-md-2">
-                  <label for="id_insere">ID</label>
-                  <input type="text" class="form-control" id="id_insere" placeholder="ID produto">
-                </div>
-                <div class="form-group col-md-5">
+                <div class="form-group col-md-6">
                   <label for="origem_insere">Origem</label>
                   <input type="text" class="form-control" id="origem_insere" placeholder="Origem">
                 </div>
-                <div class="form-group col-md-5">
+                <div class="form-group col-md-6">
                   <label for="destino_insere">Destino</label>
                   <input type="text" class="form-control" id="destino_insere" placeholder="Destino">
                 </div>
@@ -821,6 +900,46 @@
         </div>
       </div>
     </div>
+
+     <!-- Modal -->
+     <div class="modal fade bd-example-modal-lg" id="modalInsereVeiculo" tabindex="-1" role="dialog" aria-labelledby="inserirVeiculo" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <form>
+              <div class="modal-header">
+                <h5 class="modal-title" id="inserirVeiculo">Adicionar Veículo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="marca_insere_veiculo">Marca</label>
+                    <input type="text" class="form-control" id="marca_insere_veiculo" placeholder="Marca">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="modelo_insere_veiculo">Modelo</label>
+                    <input type="text" class="form-control" id="modelo_insere_veiculo" placeholder="Modelo">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="capacidade_insere_veiculo">Capacidade</label>
+                    <input type="text" class="form-control" id="capacidade_insere_veiculo" placeholder="Capacidade">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="rodagem_insere_veiculo">Rodagem</label>
+                    <input type="text" class="form-control" id="rodagem_insere_veiculo" placeholder="Rodagem">
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary">Salvar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     
 
     <!-- Optional JavaScript -->
@@ -833,6 +952,7 @@
     <script src="./js/particular/distribuidora.js" ></script>
     <script src="./js/particular/home.js" ></script>
     <script src="./js/particular/usuario.js" ></script>
+    <script src="./js/particular/veiculo.js" ></script>
     <script src="./js/particular/script.js" ></script>
     <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBf99O-EBGCFO6eM_YT1v6TzYeizhwuQVQ&callback=initMapDistribuidora">

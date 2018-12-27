@@ -55,8 +55,14 @@ $.Geral.events = function(){
     $('.pesquisa').remove();
     $('.table-altera tbody').prepend('<tr class="pesquisa"><td><input type="number" class="form-control"></td><td><input type="text" class="form-control"></td><td><input type="text" class="form-control"></td><td><input type="text" class="form-control"></td><td><input type="text" class="form-control"></td><td><input type="text" class="form-control"></td><td><input type="text" class="form-control"></td></tr>');
   });
+
+  $('body').on('click', '.filtro_veiculo', function(ev){
+    $('.pesquisa').remove();
+    $('.table-veiculos tbody').prepend('<tr class="pesquisa"><td></td><td><input type="text" class="form-control"></td><td><input type="text" class="form-control"></td><td><input type="text" class="form-control"></td><td><input type="text" class="form-control"></td><td><input type="text" class="form-control"></td><td></td></tr>');
+  });
+
   $('body').on('click', function(ev){
-    if(!$(event.target).closest('.pesquisa').length && !$(event.target).closest('.filtro_produto').length) {
+    if(!$(event.target).closest('.pesquisa').length && !$(event.target).closest('.filtro_produto').length && !$(event.target).closest('.filtro_veiculo').length) {
       $('.pesquisa').remove();
     }
   });
@@ -66,6 +72,7 @@ $(document).ready(function(){
   $.Geral.events();
   $.Distribuidora.events();
   $.Produto.events();
+  $.Veiculo.events();
   $.Home.events();
 });
 
