@@ -107,7 +107,7 @@ header h5{
 }
 
 .drop_menu{
-  position: absolute;
+  position: fixed;
   top: 15px;
   right: 10px;
 }
@@ -124,7 +124,7 @@ header h5{
 }
 
 .menu_i{
-    position: absolute;
+    position: fixed;
     top: 10px;
     left: 10px;;
 }
