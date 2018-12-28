@@ -117,7 +117,7 @@ header h5{
 }
 
 .header{
-    position: absolute;
+    position: fixed;
     height: 70px;
     width: 100%;
     background-color: #27293d;
@@ -234,13 +234,13 @@ tbody tr{
 }
 
 /* // Medium devices (tablets, 768px and up) */
-@media screen and (max-width: 991px) and (min-width: 768px) {
+/* @media screen and (max-width: 991px) and (min-width: 768px) {
   .menu_i{
     display: none;
   }
-}
+} */
 
-@media (max-width: 768px) {
+@media (max-width: 991px) {
   .sidenav.notoggle-class{
     width: 0px !important;
   }
