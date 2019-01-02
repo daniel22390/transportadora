@@ -77,6 +77,7 @@ $(document).ready(function(){
   $.Distribuidora.events();
   $.Produto.events();
   $.Veiculo.events();
+  $.Gerencia.events();
   $.Home.events();
 });
 

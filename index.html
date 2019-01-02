@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="./css/particular/distribuidora.css">
     <link rel="stylesheet" href="./css/particular/home.css">
     <link rel="stylesheet" href="./css/particular/usuario.css">
+    <link rel="stylesheet" href="./css/particular/gerencia.css">
     <title>TRANSPORTE | HOME</title>
   </head>
   <body>
@@ -655,6 +656,100 @@
           <button type="button" class="btn add_veiculo "><i class="fas fa-plus"></i></button>
         </div>
         <div class="gerencia-body">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="card">
+                <div class="card-content">
+                  <div class="card-header-blue">
+                    <h1 class="card-heading">Usuários</h1>
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table table-usuarios">
+                        <thead>
+                          <tr>
+                            <th scope="col">Código</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Cargo</th>
+                            <th scope="col">Nascimento</th>
+                            <th scope="col">Usuário</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Telefone</th>
+                            <th scope="col">Grupo</th>
+                            <th scope="col" class="text-center  ">Ações</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th scope="row">1</th>
+                            <td>Daniel Gomes de Oliveira</td>
+                            <td>Motorista</td>
+                            <td>24/01/1988</td>
+                            <td>daniel_gomes</td>
+                            <td>daniel@hotmail.com</td>
+                            <td>(33) 999999999</td>
+                            <td>Operador</td>
+                            <td class="text-center"><i class="fas fa-trash-alt text-danger delete-usuario"></i></td>
+                          </tr>
+                          <tr>
+                            <th scope="row">2</th>
+                            <td>Marcos Antonio de Jesus</td>
+                            <td>Motorista</td>
+                            <td>22/05/1975</td>
+                            <td>marcos_antonio</td>
+                            <td>marcos@hotmail.com</td>
+                            <td>(33) 999999999</td>
+                            <td>Operador</td>
+                            <td class="text-center"><i class="fas fa-trash-alt text-danger delete-usuario"></i></td>
+                          </tr>
+                          <tr>
+                            <th scope="row">3</th>
+                            <td>Carlos José de Oliveira</td>
+                            <td>Entregador</td>
+                            <td>12/10/1982</td>
+                            <td>carlos_jose</td>
+                            <td>carlos@hotmail.com</td>
+                            <td>(33) 999999999</td>
+                            <td>Operador</td>
+                            <td class="text-center"><i class="fas fa-trash-alt text-danger delete-usuario"></i></td>
+                          </tr>
+                          <tr>
+                            <th scope="row">4</th>
+                            <td>João de Barros Queiroz</td>
+                            <td>Gerente</td>
+                            <td>12/07/1968</td>
+                            <td>joao_barros</td>
+                            <td>joao@hotmail.com</td>
+                            <td>(33) 999999999</td>
+                            <td>Administrador</td>
+                            <td class="text-center"><i class="fas fa-trash-alt text-danger delete-usuario"></i></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="text-right">
+                      <button type="button" class="btn add_usuario "><i class="fas fa-plus"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <div class="card">
+                <div class="card-content">
+                  <div class="card-header-blue">
+                    <h1 class="card-heading">Grupos</h1>
+                  </div>
+                  <div class="card-body">
+                    
+                    <div class="text-right">
+                      <button type="button" class="btn add_grupo "><i class="fas fa-plus"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -950,8 +1045,132 @@
           </div>
         </div>
       </div>
-    
 
+    <div class="modal fade bd-example-modal-lg" id="modalInsereUsuario" tabindex="-1" role="dialog" aria-labelledby="inserirUsuario" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <form>
+            <div class="modal-header">
+              <h5 class="modal-title" id="inserirUsuario">Inserir Usuário</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="nome_insere_usuario">Nome</label>
+                  <input type="text" class="form-control" id="nome_insere_usuario" placeholder="Nome">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="cargo_insere_usuario">Cargo</label>
+                  <select class="custom-select" id="cargo_insere_usuario">
+                    <option value="Motorista">Motorista</option>
+                    <option value="Entregador">Entregador</option>
+                    <option value="Gerente">Gerente</option>
+                  </select>
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="nascimento_insere_usuario">Nascimento</label>
+                  <input type="text" class="form-control" id="nascimento_insere_usuario" placeholder="Nascimento">
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="email_insere_usuario">Email</label>
+                  <input type="email" class="form-control" id="email_insere_usuario" placeholder="Email">
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="telefone_insere_usuario">Telefone</label>
+                  <input type="text" class="form-control" id="telefone_insere_usuario" placeholder="Telefone">
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="grupo_insere_usuario">Grupo</label>
+                  <select class="custom-select" id="grupo_insere_usuario">
+                    <option value="Operador">Operador</option>
+                    <option value="Administrador">Administrador</option>
+                  </select>
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="usuario_insere_usuario">Usuário</label>
+                  <input type="text" class="form-control" id="usuario_insere_usuario" placeholder="Usuário">
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="senha_insere_usuario">Senha</label>
+                  <input type="password" class="form-control" id="senha_insere_usuario" placeholder="Senha">
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+              <button type="button" class="btn btn-primary">Salvar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+    <div class="modal fade bd-example-modal-lg" id="modalAlteraUsuario" tabindex="-1" role="dialog" aria-labelledby="alteraUsuario" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <form>
+            <div class="modal-header">
+              <h5 class="modal-title" id="alteraUsuario">Altera Usuário</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="nome_altera_usuario">Nome</label>
+                  <input type="text" class="form-control" id="nome_altera_usuario" placeholder="Nome">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="cargo_altera_usuario">Cargo</label>
+                  <select class="custom-select" id="cargo_altera_usuario">
+                    <option value="Motorista">Motorista</option>
+                    <option value="Entregador">Entregador</option>
+                    <option value="Gerente">Gerente</option>
+                  </select>
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="nascimento_altera_usuario">Nascimento</label>
+                  <input type="text" class="form-control" id="nascimento_altera_usuario" placeholder="Nascimento">
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="email_altera_usuario">Email</label>
+                  <input type="email" class="form-control" id="email_altera_usuario" placeholder="Email">
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="telefone_altera_usuario">Telefone</label>
+                  <input type="text" class="form-control" id="telefone_altera_usuario" placeholder="Telefone">
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="grupo_altera_usuario">Grupo</label>
+                  <select class="custom-select" id="grupo_altera_usuario">
+                    <option value="Operador">Operador</option>
+                    <option value="Administrador">Administrador</option>
+                  </select>
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="usuario_altera_usuario">Usuário</label>
+                  <input type="text" class="form-control" id="usuario_altera_usuario" placeholder="Usuário">
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="senha_altera_usuario">Senha</label>
+                  <input type="password" class="form-control" id="senha_altera_usuario" placeholder="Senha">
+                </div>
+              </div>
+              <h3 class="text-center" style="margin-top: 10px;">Localização</h3>
+              <div style="width: 100%; height: 200px;" id="mapa_altera_usuario"></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+              <button type="button" class="btn btn-primary">Salvar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="./js/jquery-3.3.1.min.js" ></script>
@@ -963,6 +1182,7 @@
     <script src="./js/particular/home.js" ></script>
     <script src="./js/particular/usuario.js" ></script>
     <script src="./js/particular/veiculo.js" ></script>
+    <script src="./js/particular/gerencia.js" ></script>
     <script src="./js/particular/script.js" ></script>
     <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBf99O-EBGCFO6eM_YT1v6TzYeizhwuQVQ&callback=initMapDistribuidora">
