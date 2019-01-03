@@ -44,6 +44,7 @@ $.Geral.events = function(){
     else if($(this).hasClass('gerencia')){
       $('.gerencia-body').show();
       $('.gerencia').addClass('selected');
+      $('[data-toggle="tooltip"]').tooltip();
     }
     else if($(this).hasClass('veiculo')){
       $('.veiculo-body').show();
@@ -79,6 +80,7 @@ $(document).ready(function(){
   $.Veiculo.events();
   $.Gerencia.events();
   $.Home.events();
+  
 });
 
 function initMapDistribuidora(){

@@ -7,6 +7,18 @@ $.Gerencia = {
       $('#modalInsereUsuario').modal('show');
     });
 
+    $('body').on('click', '.tabela-grupos tbody tr', function(ev){
+      $('#grupo_altera_grupo').val($(this).find('td:nth-child(2)').text());
+      $('#grupo_altera_descricao').val($(this).find('td:nth-child(3)').text());
+      $('#modalAlteraGrupo').modal();
+      $('#modalAlteraGrupo').modal('show');
+    });
+
+    $('body').on('click', '.add_grupo', function(ev){
+      $('#modalInsereGrupo').modal();
+      $('#modalInsereGrupo').modal('show');
+    });
+
     $('body').on('click', '.table-usuarios tbody tr', function(ev){
       $('#nome_altera_usuario').val($(this).find('td:nth-child(2)').text());
       $('#cargo_altera_usuario').val($(this).find('td:nth-child(3)').text());

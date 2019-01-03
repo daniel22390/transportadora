@@ -741,6 +741,41 @@
                     <h1 class="card-heading">Grupos</h1>
                   </div>
                   <div class="card-body">
+
+                    <table class="table tabela-grupos">
+                      <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Grupo</th>
+                          <th scope="col">Descrição</th>
+                          <th scope="col">Permissões</th>
+                          <th scope="col" class="text-center">Ações</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row">1</th>
+                          <td>Administrador</td>
+                          <td>Acesso total as funcionalidades do sistema.</td>
+                          <td class="permissoes">
+                            <i class="fas fa-users text-primary" data-toggle="tooltip" data-placement="top" title="Criar usuários."></i><i class="fas fa-users text-secondary"  data-toggle="tooltip" data-placement="top" title="Alterar usuários."></i><i class="fas fa-users text-success"  data-toggle="tooltip" data-placement="top" title="Ver usuários."></i><i class="fas fa-users text-danger"  data-toggle="tooltip" data-placement="top" title="Excluir usuários."></i>
+                            <i class="fas fa-truck text-primary"  data-toggle="tooltip" data-placement="top" title="Criar veículos."></i><i class="fas fa-truck text-secondary" data-toggle="tooltip" data-placement="top" title="Alterar veículos."></i><i class="fas fa-truck text-success" data-toggle="tooltip" data-placement="top" title="Ver veículos."></i><i class="fas fa-truck text-danger" data-toggle="tooltip" data-placement="top" title="Excluir veículos."></i>
+                            <i class="fas fa-route text-success"  data-toggle="tooltip" data-placement="top" title="Ver CTDs."></i>
+                            <i class="fas fa-box-open text-primary"  data-toggle="tooltip" data-placement="top" title="Criar pacotes."></i><i class="fas fa-box-open text-secondary" data-toggle="tooltip" data-placement="top" title="Alterar pacotes."></i><i class="fas fa-box-open text-success" data-toggle="tooltip" data-placement="top" title="Ver pacotes."></i><i class="fas fa-box-open text-danger" data-toggle="tooltip" data-placement="top" title="Excluir pacotes."></i></td>
+                            <td class="text-center"><i class="fas fa-trash-alt text-danger"></i></td>
+                        </tr>
+                        <tr>
+                          <th scope="row">2</th>
+                          <td>Operador</td>
+                          <td>Acesso a todas as funcionalidade, exceto na página de veículos.</td>
+                          <td class="permissoes">
+                              <i class="fas fa-users text-primary" data-toggle="tooltip" data-placement="top" title="Criar usuários."></i><i class="fas fa-users text-secondary"  data-toggle="tooltip" data-placement="top" title="Alterar usuários."></i><i class="fas fa-users text-success"  data-toggle="tooltip" data-placement="top" title="Ver usuários."></i><i class="fas fa-users text-danger"  data-toggle="tooltip" data-placement="top" title="Excluir usuários."></i>
+                              <i class="fas fa-route text-success"  data-toggle="tooltip" data-placement="top" title="Ver CTDs."></i>
+                              <i class="fas fa-box-open text-primary"  data-toggle="tooltip" data-placement="top" title="Criar pacotes."></i><i class="fas fa-box-open text-secondary" data-toggle="tooltip" data-placement="top" title="Alterar pacotes."></i><i class="fas fa-box-open text-success" data-toggle="tooltip" data-placement="top" title="Ver pacotes."></i><i class="fas fa-box-open text-danger" data-toggle="tooltip" data-placement="top" title="Excluir pacotes."></i></td>
+                              <td class="text-center"><i class="fas fa-trash-alt text-danger"></i></td>
+                        </tr>
+                      </tbody>
+                    </table>
                     
                     <div class="text-right">
                       <button type="button" class="btn add_grupo "><i class="fas fa-plus"></i></button>
@@ -1162,6 +1197,116 @@
               </div>
               <h3 class="text-center" style="margin-top: 10px;">Localização</h3>
               <div style="width: 100%; height: 200px;" id="mapa_altera_usuario"></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+              <button type="button" class="btn btn-primary">Salvar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-lg" id="modalAlteraGrupo" tabindex="-1" role="dialog" aria-labelledby="alteraGrupo" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <form>
+            <div class="modal-header">
+              <h5 class="modal-title" id="alteraGrupo">Altera Grupo</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="grupo_altera_grupo">Grupo</label>
+                  <input type="text" class="form-control" id="grupo_altera_grupo" placeholder="Grupo">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="grupo_altera_descricao">Descrição</label>
+                  <input type="text" class="form-control" id="grupo_altera_descricao" placeholder="Descrição">
+                </div>
+              </div>
+              <h3 class="text-center" style="margin-top: 10px;">Trajeto</h3>
+              <div style="max-height: 40vh; overflow-y: auto;">
+                <div class="table-responsive">
+                  <table class="table tabela-add-permissao table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Permissão</th>
+                        <th scope="col" class="text-center">Ação</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="insere-add-permissao">
+                        <td><select class="custom-select input-insere">
+                          <option selected>Selecione</option>
+                          <option value="Criar usuários">Criar usuários</option>
+                          <option value="Criar usuários">Ver usuários</option>
+                          <option value="Criar usuários">Criar veículos</option>
+                        </select></td>
+                        <td class="text-center"><i class="fas fa-save insere-permissao fa-2x"></i></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+              <button type="button" class="btn btn-primary">Salvar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-lg" id="modalInsereGrupo" tabindex="-1" role="dialog" aria-labelledby="insereGrupo" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <form>
+            <div class="modal-header">
+              <h5 class="modal-title" id="insereGrupo">Insere Grupo</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="grupo_insere_grupo">Grupo</label>
+                  <input type="text" class="form-control" id="grupo_insere_grupo" placeholder="Grupo">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="grupo_insere_descricao">Descrição</label>
+                  <input type="text" class="form-control" id="grupo_insere_descricao" placeholder="Descrição">
+                </div>
+              </div>
+              <h3 class="text-center" style="margin-top: 10px;">Trajeto</h3>
+              <div style="max-height: 40vh; overflow-y: auto;">
+                <div class="table-responsive">
+                  <table class="table tabela-insere-permissao table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Permissão</th>
+                        <th scope="col" class="text-center">Ação</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="insere-insere-permissao">
+                        <td><select class="custom-select input-insere">
+                          <option selected>Selecione</option>
+                          <option value="Criar usuários">Criar usuários</option>
+                          <option value="Criar usuários">Ver usuários</option>
+                          <option value="Criar usuários">Criar veículos</option>
+                        </select></td>
+                        <td class="text-center"><i class="fas fa-save insere-permissao fa-2x"></i></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
