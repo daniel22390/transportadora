@@ -25,12 +25,14 @@
           </div>
       
           <!-- Login Form -->
-          <form>
-            <input type="text" id="login" class="fadeIn second" name="login" placeholder="Login">
-            <input type="password" id="password" class="fadeIn third" name="login" placeholder="Senha">
+          <form class="form-login">
+            <input type="text" required id="login" class="fadeIn second" name="usuario" placeholder="Login">
+            <input type="password" required id="password" class="fadeIn third" name="password" placeholder="Senha">
             <!-- <input type="submit" class="fadeIn fourth entrar" value="Entrar"> -->
-            <a href="./home.html" type="submit" class="fadeIn fourth entrar" value="Entrar">Entrar</a>
+            <button type="submit" class="fadeIn fourth entrar" value="Entrar">Entrar</button>
           </form>
+          <div class="alerts"></div>
+          
       
           <!-- Remind Passowrd -->
           <div id="formFooter">
@@ -42,5 +44,33 @@
     <script src="./js/jquery-3.3.1.min.js" ></script>
     <script src="./js/popper.min.js" ></script>
     <script src="./js/bootstrap.min.js" ></script>
+
+    <script type="text/javascript">
+      $(".form-login").submit(function(ev){
+        ev.preventDefault();
+
+        $.ajax({
+          url: "http://localhost:3000/token",
+          method: "post",
+          crossDomain: true,
+          dataType: 'json',
+          data: $(this).serialize()
+        })
+        .done(function( data ) {  
+          if(data.token){
+            document.cookie = "token=" + data.token;
+            window.location = "home.html";
+          }
+        })
+        .fail(function(error){
+          $('.alerts').html('<div class="alert alert-warning" role="alert">'+
+            'Usuário / senha inválidos!'+
+            '<button type="button" class="close" data-dismiss="alert" aria-label="Close">'+
+              '<span aria-hidden="true">&times;</span>'+
+            '</button>'+
+          '</div>')
+        });
+      });
+    </script>
   </body>
 </html>
