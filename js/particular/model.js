@@ -17,6 +17,76 @@ $.Model = {
     });
   },
 
+  carregaUsuarioId: function(params, callback){
+    $.ajax({
+      url: url + "usuarios/" + params.id,
+      headers: {Authorization: 'Bearer ' + $.Model.getCookie('token')}, 
+      method: "get",
+      crossDomain: true,
+      dataType: 'json',
+      data: {}
+    })
+    .done(callback)
+    .fail(function(error){
+    });
+  },
+
+  atualizaUsuario: function(params, callback){
+    $.ajax({
+      url: url + params.action,
+      headers: {Authorization: 'Bearer ' + $.Model.getCookie('token')}, 
+      method: "put",
+      crossDomain: true,
+      dataType: 'json',
+      data: params.data
+    })
+    .done(callback)
+    .fail(function(error){
+    });
+  },
+
+  carregaUsuarios: function(params, callback){
+    $.ajax({
+      url: url + "usuarios",
+      headers: {Authorization: 'Bearer ' + $.Model.getCookie('token')}, 
+      method: "get",
+      crossDomain: true,
+      dataType: 'json',
+      data: params
+    })
+    .done(callback)
+    .fail(function(error){
+    });
+  },
+
+  carregaCargos: function(params, callback){
+    $.ajax({
+      url: url + "cargos",
+      headers: {Authorization: 'Bearer ' + $.Model.getCookie('token')}, 
+      method: "get",
+      crossDomain: true,
+      dataType: 'json',
+      data: params
+    })
+    .done(callback)
+    .fail(function(error){
+    });
+  },
+
+  carregaGrupos: function(params, callback){
+    $.ajax({
+      url: url + "grupos",
+      headers: {Authorization: 'Bearer ' + $.Model.getCookie('token')}, 
+      method: "get",
+      crossDomain: true,
+      dataType: 'json',
+      data: params
+    })
+    .done(callback)
+    .fail(function(error){
+    });
+  },
+
   getCookie: function(cname) {
     var name = cname + "=";
     var decodedCookie = decodeURIComponent(document.cookie);

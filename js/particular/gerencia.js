@@ -2,9 +2,38 @@ $.Gerencia = {};
 
 $.Gerencia = {
   events: function(){
+    $('body').on('click', '.gerencia', function(ev){
+      $.Model.carregaUsuarios({}, function(data){
+        var _html = "";
+        $.each(data, function(k, v){
+          _html += '<tr usuario="'+ v.idusuario +'">';
+          _html += ' <td>'+ v.idusuario +'</td>';
+          _html += ' <td>'+ v.nome +'</td>';
+          _html += ' <td>'+ v.Cargo.nome +'</td>';
+          _html += ' <td>'+ $.Geral.retornaData(v.nascimento) +'</td>';
+          _html += ' <td>'+ v.usuario +'</td>';
+          _html += ' <td>'+ v.email +'</td>';
+          _html += ' <td>'+ v.telefone +'</td>';
+          _html += ' <td>'+ v.Grupo.nome +'</td>';
+          _html += ' <td><td class="text-center"><i class="fas fa-trash-alt text-danger delete-usuario" usuario="'+ v.idusuario +'"></i></td></td>';
+          _html += '</tr>';
+        });
+        $('.table-usuarios tbody').html(_html);
+      });
+    });
+
     $('body').on('click', '.add_usuario', function(ev){
       $('#modalInsereUsuario').modal();
       $('#modalInsereUsuario').modal('show');
+    });
+
+    $('body').on('submit', ".atualiza_usuario", function(ev){
+      ev.preventDefault();
+
+      $.Model.atualizaUsuario({action: $(this).attr('action'), data: $(this).serialize()}, function(data){
+        $('.gerencia').trigger('click');
+        $('#modalAlteraUsuario').modal('hide');
+      });
     });
 
     $('body').on('click', '.tabela-grupos tbody tr', function(ev){
@@ -20,14 +49,6 @@ $.Gerencia = {
     });
 
     $('body').on('click', '.table-usuarios tbody tr', function(ev){
-      $('#nome_altera_usuario').val($(this).find('td:nth-child(2)').text());
-      $('#cargo_altera_usuario').val($(this).find('td:nth-child(3)').text());
-      $('#nascimento_altera_usuario').val($(this).find('td:nth-child(4)').text());
-      $('#email_altera_usuario').val($(this).find('td:nth-child(6)').text());
-      $('#telefone_altera_usuario').val($(this).find('td:nth-child(7)').text());
-      $('#grupo_altera_usuario').val($(this).find('td:nth-child(8)').text());
-      $('#usuario_altera_usuario').val($(this).find('td:nth-child(5)').text());
-
       // The location of Uluru
       var uluru = {lat: -18.865381, lng: -41.962696};
       // The map, centered at Uluru
@@ -49,6 +70,37 @@ $.Gerencia = {
         icon: image,
         title: "CTE GV"
       });
+
+      var _id = $(this).attr('usuario');
+      $.Model.carregaCargos({}, function(data){
+        let _html = "";
+        $.each(data, function(k, v){
+          _html += '<option value="'+ v.idcargo +'">'+ v.nome +'</option>';
+        });
+        $('#cargo_altera_usuario').html(_html);
+        $.Model.carregaGrupos({}, function(data){
+          let _html = "";
+          $.each(data, function(k, v){
+            _html += '<option value="'+ v.idgrupo +'">'+ v.nome +'</option>';
+          });
+          $('#grupo_altera_usuario').html(_html);
+
+          $.Model.carregaUsuarioId({id: _id}, function(data){
+            $('#nome_altera_usuario').val(data.nome);
+            $('#cargo_altera_usuario').val(data.cargo_idcargo);
+            $('#nascimento_altera_usuario').val( $.Geral.retornaData(data.nascimento));
+            $('#email_altera_usuario').val(data.email);
+            $('#telefone_altera_usuario').val(data.telefone);
+            $('#grupo_altera_usuario').val(data.grupo_idgrupo);
+            $('#usuario_altera_usuario').val(data.usuario);
+
+            $(".atualiza_usuario").attr('action', 'usuarios/' + data.idusuario);
+          });    
+        });
+      });
+
+      
+
       $('#modalAlteraUsuario').modal();
       $('#modalAlteraUsuario').modal('show');
     });

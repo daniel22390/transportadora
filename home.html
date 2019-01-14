@@ -67,7 +67,7 @@
             <i class="fas fa-truck-moving fa-2x"></i>
             <span>Veículos</span>
           </li>
-          <li class="gerencia">
+          <li class="gerencia" style="display: none;">
             <i class="fas fa-edit fa-2x"></i>
             <span>Gerência</span>
           </li>
@@ -680,7 +680,7 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
+                          <!-- <tr>
                             <th scope="row">1</th>
                             <td>Daniel Gomes de Oliveira</td>
                             <td>Motorista</td>
@@ -723,7 +723,7 @@
                             <td>(33) 999999999</td>
                             <td>Administrador</td>
                             <td class="text-center"><i class="fas fa-trash-alt text-danger delete-usuario"></i></td>
-                          </tr>
+                          </tr> -->
                         </tbody>
                       </table>
                     </div>
@@ -1146,7 +1146,7 @@
     <div class="modal fade bd-example-modal-lg" id="modalAlteraUsuario" tabindex="-1" role="dialog" aria-labelledby="alteraUsuario" aria-hidden="true">
       <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
-          <form>
+          <form class="atualiza_usuario" action="" method="put">
             <div class="modal-header">
               <h5 class="modal-title" id="alteraUsuario">Altera Usuário</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -1157,42 +1157,38 @@
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="nome_altera_usuario">Nome</label>
-                  <input type="text" class="form-control" id="nome_altera_usuario" placeholder="Nome">
+                  <input type="text" name="nome" class="form-control" id="nome_altera_usuario" placeholder="Nome">
                 </div>
                 <div class="form-group col-md-6">
                   <label for="cargo_altera_usuario">Cargo</label>
-                  <select class="custom-select" id="cargo_altera_usuario">
-                    <option value="Motorista">Motorista</option>
+                  <select name="cargo_idcargo" class="custom-select" id="cargo_altera_usuario">
+                    <!-- <option value="Motorista">Motorista</option>
                     <option value="Entregador">Entregador</option>
-                    <option value="Gerente">Gerente</option>
+                    <option value="Gerente">Gerente</option> -->
                   </select>
                 </div>
                 <div class="form-group col-md-4">
                   <label for="nascimento_altera_usuario">Nascimento</label>
-                  <input type="text" class="form-control" id="nascimento_altera_usuario" placeholder="Nascimento">
+                  <input name="nascimento" type="text" class="form-control" id="nascimento_altera_usuario" placeholder="Nascimento">
                 </div>
                 <div class="form-group col-md-4">
                   <label for="email_altera_usuario">Email</label>
-                  <input type="email" class="form-control" id="email_altera_usuario" placeholder="Email">
+                  <input name="email" type="email" class="form-control" id="email_altera_usuario" placeholder="Email">
                 </div>
                 <div class="form-group col-md-4">
                   <label for="telefone_altera_usuario">Telefone</label>
-                  <input type="text" class="form-control" id="telefone_altera_usuario" placeholder="Telefone">
+                  <input name="telefone" type="text" class="form-control" id="telefone_altera_usuario" placeholder="Telefone">
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-6">
                   <label for="grupo_altera_usuario">Grupo</label>
-                  <select class="custom-select" id="grupo_altera_usuario">
-                    <option value="Operador">Operador</option>
-                    <option value="Administrador">Administrador</option>
+                  <select name="grupo_idgrupo" class="custom-select" id="grupo_altera_usuario">
+                    <!-- <option value="Operador">Operador</option>
+                    <option value="Administrador">Administrador</option> -->
                   </select>
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-6">
                   <label for="usuario_altera_usuario">Usuário</label>
-                  <input type="text" class="form-control" id="usuario_altera_usuario" placeholder="Usuário">
-                </div>
-                <div class="form-group col-md-4">
-                  <label for="senha_altera_usuario">Senha</label>
-                  <input type="password" class="form-control" id="senha_altera_usuario" placeholder="Senha">
+                  <input name="usuario" type="text" class="form-control" id="usuario_altera_usuario" placeholder="Usuário">
                 </div>
               </div>
               <h3 class="text-center" style="margin-top: 10px;">Localização</h3>
@@ -1200,7 +1196,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-              <button type="button" class="btn btn-primary">Salvar</button>
+              <button type="submit" class="btn btn-primary">Salvar</button>
             </div>
           </form>
         </div>
@@ -1322,6 +1318,7 @@
     <script src="./js/popper.min.js" ></script>
     <script src="./js/bootstrap.min.js" ></script>
     <script src="./js/Chart.min.js" ></script>
+    <script src="./js/moment.min.js" ></script>
     <script src="./js/particular/model.js" ></script>
     <script src="./js/particular/produto.js" ></script>
     <script src="./js/particular/distribuidora.js" ></script>

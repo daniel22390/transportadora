@@ -1,6 +1,10 @@
 $.Geral = {};
 
 $.Geral = {
+  variaveis: {
+    usuario: null 
+  },
+
   events: function(){
     $('.dropdown-toggle').dropdown();
     
@@ -76,10 +80,22 @@ $.Geral = {
 
   carregaUsuario: function(){
     $.Model.carregaUsuario({}, function(data){
-      console.log(data);
-
+      $.Geral.variaveis.usuario = data;
+      $.Geral.carregaVisualizacoes(data.Grupo.Permissoes);
       $('#btn_user span').text(data.usuario.toUpperCase());
     });
+  },
+
+  carregaVisualizacoes: (permissoes) => {
+    $.each(permissoes, function(k, v){
+      if(v.idpermissao === 19){
+        $('.gerencia').show();
+      }
+    });
+  },
+
+  retornaData: function(data){
+    return moment(data).format('DD/MM/YYYY');
   }
 }
 
