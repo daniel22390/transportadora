@@ -45,6 +45,34 @@ $.Model = {
     });
   },
 
+  insereUsuario: function(params, callback){
+    $.ajax({
+      url: url + params.action,
+      headers: {Authorization: 'Bearer ' + $.Model.getCookie('token')}, 
+      method: "post",
+      crossDomain: true,
+      dataType: 'json',
+      data: params.data
+    })
+    .done(callback)
+    .fail(function(error){
+    });
+  },
+
+  removeUsuario: function(params, callback){
+    $.ajax({
+      url: url + params.action,
+      headers: {Authorization: 'Bearer ' + $.Model.getCookie('token')}, 
+      method: "delete",
+      crossDomain: true,
+      dataType: 'json',
+      data: params.data
+    })
+    .done(callback)
+    .fail(function(error){
+    });
+  },
+
   carregaUsuarios: function(params, callback){
     $.ajax({
       url: url + "usuarios",

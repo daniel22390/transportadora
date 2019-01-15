@@ -1084,7 +1084,7 @@
     <div class="modal fade bd-example-modal-lg" id="modalInsereUsuario" tabindex="-1" role="dialog" aria-labelledby="inserirUsuario" aria-hidden="true">
       <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
-          <form>
+          <form class="form_addususario">
             <div class="modal-header">
               <h5 class="modal-title" id="inserirUsuario">Inserir Usuário</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -1095,48 +1095,48 @@
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="nome_insere_usuario">Nome</label>
-                  <input type="text" class="form-control" id="nome_insere_usuario" placeholder="Nome">
+                  <input name="nome" type="text" class="form-control" id="nome_insere_usuario" placeholder="Nome">
                 </div>
                 <div class="form-group col-md-6">
                   <label for="cargo_insere_usuario">Cargo</label>
-                  <select class="custom-select" id="cargo_insere_usuario">
-                    <option value="Motorista">Motorista</option>
+                  <select name="cargo_idcargo" class="custom-select" id="cargo_insere_usuario">
+                    <!-- <option value="Motorista">Motorista</option>
                     <option value="Entregador">Entregador</option>
-                    <option value="Gerente">Gerente</option>
+                    <option value="Gerente">Gerente</option> -->
                   </select>
                 </div>
                 <div class="form-group col-md-4">
                   <label for="nascimento_insere_usuario">Nascimento</label>
-                  <input type="text" class="form-control" id="nascimento_insere_usuario" placeholder="Nascimento">
+                  <input name="nascimento" type="text" class="form-control" id="nascimento_insere_usuario" placeholder="Nascimento">
                 </div>
                 <div class="form-group col-md-4">
                   <label for="email_insere_usuario">Email</label>
-                  <input type="email" class="form-control" id="email_insere_usuario" placeholder="Email">
+                  <input name="email" type="email" class="form-control" id="email_insere_usuario" placeholder="Email">
                 </div>
                 <div class="form-group col-md-4">
                   <label for="telefone_insere_usuario">Telefone</label>
-                  <input type="text" class="form-control" id="telefone_insere_usuario" placeholder="Telefone">
+                  <input name="telefone" type="text" class="form-control" id="telefone_insere_usuario" placeholder="Telefone">
                 </div>
                 <div class="form-group col-md-4">
                   <label for="grupo_insere_usuario">Grupo</label>
-                  <select class="custom-select" id="grupo_insere_usuario">
-                    <option value="Operador">Operador</option>
-                    <option value="Administrador">Administrador</option>
+                  <select name="grupo_idgrupo" class="custom-select" id="grupo_insere_usuario">
+                    <!-- <option value="Operador">Operador</option>
+                    <option value="Administrador">Administrador</option> -->
                   </select>
                 </div>
                 <div class="form-group col-md-4">
                   <label for="usuario_insere_usuario">Usuário</label>
-                  <input type="text" class="form-control" id="usuario_insere_usuario" placeholder="Usuário">
+                  <input name="usuario" type="text" class="form-control" id="usuario_insere_usuario" placeholder="Usuário">
                 </div>
                 <div class="form-group col-md-4">
                   <label for="senha_insere_usuario">Senha</label>
-                  <input type="password" class="form-control" id="senha_insere_usuario" placeholder="Senha">
+                  <input name="password" type="password" class="form-control" id="senha_insere_usuario" placeholder="Senha">
                 </div>
               </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-              <button type="button" class="btn btn-primary">Salvar</button>
+              <button type="submit" class="btn btn-primary">Salvar</button>
             </div>
           </form>
         </div>
@@ -1179,16 +1179,21 @@
                   <label for="telefone_altera_usuario">Telefone</label>
                   <input name="telefone" type="text" class="form-control" id="telefone_altera_usuario" placeholder="Telefone">
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                   <label for="grupo_altera_usuario">Grupo</label>
                   <select name="grupo_idgrupo" class="custom-select" id="grupo_altera_usuario">
                     <!-- <option value="Operador">Operador</option>
                     <option value="Administrador">Administrador</option> -->
                   </select>
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                   <label for="usuario_altera_usuario">Usuário</label>
                   <input name="usuario" type="text" class="form-control" id="usuario_altera_usuario" placeholder="Usuário">
+                </div>
+
+                <div class="form-group col-md-4">
+                  <label for="senha_altera_usuario">Senha</label>
+                  <input type="text" class="form-control" id="senha_altera_usuario" placeholder="Senha">
                 </div>
               </div>
               <h3 class="text-center" style="margin-top: 10px;">Localização</h3>

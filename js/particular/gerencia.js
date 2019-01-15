@@ -22,15 +22,49 @@ $.Gerencia = {
       });
     });
 
+    $('body').on('click', '.delete-usuario', function(ev){
+      ev.stopPropagation();
+      var _id = $(this).attr("usuario");
+
+      $.Model.removeUsuario({action: "usuarios/" + _id, data: {}}, function(data){
+        $('.gerencia').trigger('click');
+      });
+    });
+
     $('body').on('click', '.add_usuario', function(ev){
+      $.Model.carregaCargos({}, function(data){
+        let _html = "";
+        $.each(data, function(k, v){
+          _html += '<option value="'+ v.idcargo +'">'+ v.nome +'</option>';
+        });
+        $('#cargo_insere_usuario').html(_html);
+      });
+
+      $.Model.carregaGrupos({}, function(data){
+        let _html = "";
+        $.each(data, function(k, v){
+          _html += '<option value="'+ v.idgrupo +'">'+ v.nome +'</option>';
+        });
+        $('#grupo_insere_usuario').html(_html);
+      });
+
       $('#modalInsereUsuario').modal();
       $('#modalInsereUsuario').modal('show');
+    });
+
+    $('body').on('submit', ".form_addususario", function(ev){
+      ev.preventDefault();
+      $.Model.insereUsuario({action: "usuarios", data: $(this).serialize()}, function(data){
+        $('.gerencia').trigger('click');
+        $('#modalInsereUsuario').modal('hide');
+      });
     });
 
     $('body').on('submit', ".atualiza_usuario", function(ev){
       ev.preventDefault();
 
-      $.Model.atualizaUsuario({action: $(this).attr('action'), data: $(this).serialize()}, function(data){
+      var serializado = $(this).serialize() + ($('#senha_altera_usuario').val() === "" ? "" : ("&password=" + $('#senha_altera_usuario').val()));
+      $.Model.atualizaUsuario({action: $(this).attr('action'), data: serializado}, function(data){
         $('.gerencia').trigger('click');
         $('#modalAlteraUsuario').modal('hide');
       });
