@@ -87,6 +87,34 @@ $.Model = {
     });
   },
 
+  carregaGrupos: function(params, callback){
+    $.ajax({
+      url: url + "grupos",
+      headers: {Authorization: 'Bearer ' + $.Model.getCookie('token')}, 
+      method: "get",
+      crossDomain: true,
+      dataType: 'json',
+      data: params
+    })
+    .done(callback)
+    .fail(function(error){
+    });
+  },
+
+  carregaGrupo: function(params, callback){
+    $.ajax({
+      url: url + "grupos/" + params.id,
+      headers: {Authorization: 'Bearer ' + $.Model.getCookie('token')}, 
+      method: "get",
+      crossDomain: true,
+      dataType: 'json',
+      data: params
+    })
+    .done(callback)
+    .fail(function(error){
+    });
+  },
+
   carregaCargos: function(params, callback){
     $.ajax({
       url: url + "cargos",

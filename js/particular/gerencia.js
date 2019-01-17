@@ -1,3 +1,24 @@
+var $permissoes = {
+  2: {icon: "fas fa-home", color: "text-success"},
+  3: {icon: "fas fa-box-open", color: "text-success"},
+  4: {icon: "fas fa-box-open", color: "text-secondary"},
+  5: {icon: "fas fa-box-open", color: "text-danger"},
+  6: {icon: "fas fa-box-open", color: "text-primary"},
+  7: {icon: "fas fa-route", color: "text-success"},
+  8: {icon: "fas fa-route", color: "text-secondary"},
+  9: {icon: "fas fa-route", color: "text-danger"},
+  10: {icon: "fas fa-route", color: "text-primary"},
+  11: {icon: "fas fa-users", color: "text-success"},
+  12: {icon: "fas fa-users", color: "text-secondary"},
+  13: {icon: "fas fa-users", color: "text-danger"},
+  14: {icon: "fas fa-users", color: "text-primary"},
+  15: {icon: "fas fa-truck-moving", color: "text-success"},
+  16: {icon: "fas fa-truck-moving", color: "text-secondary"},
+  17: {icon: "fas fa-truck-moving", color: "text-danger"},
+  18: {icon: "fas fa-truck-moving", color: "text-primary"},
+  19: {icon: "fas fa-edit", color: "text-success"}
+};
+
 $.Gerencia = {};
 
 $.Gerencia = {
@@ -15,10 +36,27 @@ $.Gerencia = {
           _html += ' <td>'+ v.email +'</td>';
           _html += ' <td>'+ v.telefone +'</td>';
           _html += ' <td>'+ v.Grupo.nome +'</td>';
-          _html += ' <td><td class="text-center"><i class="fas fa-trash-alt text-danger delete-usuario" usuario="'+ v.idusuario +'"></i></td></td>';
+          _html += ' <td class="text-center"><i class="fas fa-trash-alt text-danger delete-usuario" usuario="'+ v.idusuario +'"></i></td>';
           _html += '</tr>';
         });
         $('.table-usuarios tbody').html(_html);
+      });
+
+      $.Model.carregaGrupos({}, function(data){
+        var _html = "";
+        $.each(data, function(k, v){
+          _html += '<tr idgrupo="'+ v.idgrupo +'">'+
+            '<th scope="row">'+ v.idgrupo +'</th>'+
+            '<td>'+ v.nome +'</td>'+
+            '<td>' + v.descricao + '</td>'+
+            '<td class="permissoes">';
+            $.each(v.Permissoes, function(k, v){
+              _html += '<i class="'+ $permissoes[v.idpermissao].icon +' '+ $permissoes[v.idpermissao].color +'" data-toggle="tooltip" data-placement="top" title="'+ v.descricao +'"></i>';
+            });
+           _html += '</td><td class="text-center"><i class="fas fa-trash-alt text-danger"></i></td></tr>';
+        });
+        $('.tabela-grupos tbody').html(_html);
+        $('[data-toggle="tooltip"]').tooltip()
       });
     });
 
@@ -71,8 +109,18 @@ $.Gerencia = {
     });
 
     $('body').on('click', '.tabela-grupos tbody tr', function(ev){
-      $('#grupo_altera_grupo').val($(this).find('td:nth-child(2)').text());
-      $('#grupo_altera_descricao').val($(this).find('td:nth-child(3)').text());
+      var _id = $(this).attr('idgrupo');
+      $.Model.carregaGrupo({id: _id}, function(data){
+        console.log(data);
+        $('#grupo_altera_grupo').val(data.nome);
+        $('#grupo_altera_descricao').val(data.descricao);
+        var _html = "";
+        $.each(data.Permissoes, function(k, v){
+          _html += '<tr><td>'+ v.descricao +'</td><td class="text-center"><i class="fas fa-trash-alt fa-2x text-danger"></i></td></tr>';
+        });
+        $('.tabela-add-permissao tbody').prepend(_html);
+      });
+
       $('#modalAlteraGrupo').modal();
       $('#modalAlteraGrupo').modal('show');
     });
