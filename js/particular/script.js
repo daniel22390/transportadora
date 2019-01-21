@@ -88,7 +88,7 @@ $.Geral = {
 
   carregaVisualizacoes: (permissoes) => {
     $.each(permissoes, function(k, v){
-      if(v.idpermissao === 19){
+      if(v.idpermissao === 18){
         $('.gerencia').show();
       }
     });
