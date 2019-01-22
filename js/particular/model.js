@@ -143,6 +143,20 @@ $.Model = {
     });
   },
 
+  carregaPermissoes: function(params, callback){
+    $.ajax({
+      url: url + "permissoes",
+      headers: {Authorization: 'Bearer ' + $.Model.getCookie('token')}, 
+      method: "get",
+      crossDomain: true,
+      dataType: 'json',
+      data: params
+    })
+    .done(callback)
+    .fail(function(error){
+    });
+  },
+
   getCookie: function(cname) {
     var name = cname + "=";
     var decodedCookie = decodeURIComponent(document.cookie);

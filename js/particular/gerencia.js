@@ -128,6 +128,26 @@ $.Gerencia = {
     $('body').on('click', '.add_grupo', function(ev){
       $('#modalInsereGrupo').modal();
       $('#modalInsereGrupo').modal('show');
+
+      $.Model.carregaPermissoes({}, function(data){
+        var _html = "<option value=''>Selecione</option>";
+
+        $.each(data, function(k, v){
+          _html += '<option value="'+ v.idpermissao +'">'+ v.descricao +'</option>';
+        });
+
+        $('.input-insere').html(_html);
+      });
+    });
+
+    $('body').on('click', '.insere-permissao', function(ev){
+      var _id = $('#select-permissao').val();
+      var _descricao = $('#select-permissao [value="'+ _id +'"]').text();
+      $('.tabela-insere-permissao').prepend('<tr idpermissao="'+ _id +'"><td>'+ _descricao +'</td><td class="text-center"><i class="fas fa-trash-alt fa-2x text-danger delete-permissao"></i></td></tr>')
+    });
+
+    $('body').on('click', '.delete-permissao', function(ev){
+      $(this).parent().parent().remove();
     });
 
     $('body').on('click', '.table-usuarios tbody tr', function(ev){
