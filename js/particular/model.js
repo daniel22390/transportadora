@@ -45,6 +45,20 @@ $.Model = {
     });
   },
 
+  alteraGrupo: function(params, callback){
+    $.ajax({
+      url: url + "grupos/" + params.id,
+      headers: {Authorization: 'Bearer ' + $.Model.getCookie('token')}, 
+      method: "put",
+      crossDomain: true,
+      dataType: 'json',
+      data: params
+    })
+    .done(callback)
+    .fail(function(error){
+    });
+  },
+
   insereUsuario: function(params, callback){
     $.ajax({
       url: url + params.action,
@@ -115,6 +129,20 @@ $.Model = {
     });
   },
 
+  removeGrupo: function(params, callback){
+    $.ajax({
+      url: url + params.action,
+      headers: {Authorization: 'Bearer ' + $.Model.getCookie('token')}, 
+      method: "delete",
+      crossDomain: true,
+      dataType: 'json',
+      data: params.data
+    })
+    .done(callback)
+    .fail(function(error){
+    });
+  },
+
   carregaCargos: function(params, callback){
     $.ajax({
       url: url + "cargos",
@@ -134,6 +162,20 @@ $.Model = {
       url: url + "grupos",
       headers: {Authorization: 'Bearer ' + $.Model.getCookie('token')}, 
       method: "get",
+      crossDomain: true,
+      dataType: 'json',
+      data: params
+    })
+    .done(callback)
+    .fail(function(error){
+    });
+  },
+
+  salvaGrupo: function(params, callback){
+    $.ajax({
+      url: url + "grupos",
+      headers: {Authorization: 'Bearer ' + $.Model.getCookie('token')}, 
+      method: "post",
       crossDomain: true,
       dataType: 'json',
       data: params

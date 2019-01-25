@@ -46,14 +46,14 @@ $.Gerencia = {
         var _html = "";
         $.each(data, function(k, v){
           _html += '<tr idgrupo="'+ v.idgrupo +'">'+
-            '<th scope="row">'+ v.idgrupo +'</th>'+
+            '<td>'+ v.idgrupo +'</td>'+
             '<td>'+ v.nome +'</td>'+
             '<td>' + v.descricao + '</td>'+
             '<td class="permissoes">';
             $.each(v.Permissoes, function(k, v){
               _html += '<i class="'+ $permissoes[v.idpermissao].icon +' '+ $permissoes[v.idpermissao].color +'" data-toggle="tooltip" data-placement="top" title="'+ v.descricao +'"></i>';
             });
-           _html += '</td><td class="text-center"><i class="fas fa-trash-alt text-danger"></i></td></tr>';
+           _html += '</td><td class="text-center"><i grupo="'+ v.idgrupo +'" class="fas fa-trash-alt text-danger delete-grupo"></i></td></tr>';
         });
         $('.tabela-grupos tbody').html(_html);
         $('[data-toggle="tooltip"]').tooltip()
@@ -111,14 +111,24 @@ $.Gerencia = {
     $('body').on('click', '.tabela-grupos tbody tr', function(ev){
       var _id = $(this).attr('idgrupo');
       $.Model.carregaGrupo({id: _id}, function(data){
-        console.log(data);
+        $('#grupo_altera_id').val(data.idgrupo);
         $('#grupo_altera_grupo').val(data.nome);
         $('#grupo_altera_descricao').val(data.descricao);
         var _html = "";
         $.each(data.Permissoes, function(k, v){
-          _html += '<tr><td>'+ v.descricao +'</td><td class="text-center"><i class="fas fa-trash-alt fa-2x text-danger"></i></td></tr>';
+          _html += '<tr idpermissao="'+ v.idpermissao +'"><td>'+ v.descricao +'</td><td class="text-center"><i class="fas fa-trash-alt fa-2x text-danger delete-permissao"></i></td></tr>';
         });
         $('.tabela-add-permissao tbody').prepend(_html);
+      });
+
+      $.Model.carregaPermissoes({}, function(data){
+        var _html = "<option value=''>Selecione</option>";
+
+        $.each(data, function(k, v){
+          _html += '<option value="'+ v.idpermissao +'">'+ v.descricao +'</option>';
+        });
+
+        $('#altera-permissao-grupo').html(_html);
       });
 
       $('#modalAlteraGrupo').modal();
@@ -140,10 +150,54 @@ $.Gerencia = {
       });
     });
 
+    $('body').on('submit', '.insere-grupo', function(ev){
+      ev.preventDefault();
+      var _permissoes = [];
+
+      $.each($('.tabela-insere-permissao tr[idpermissao]'), function(k, v){
+        _permissoes.push($(v).attr('idpermissao'));
+      });
+
+      $.Model.salvaGrupo({nome: $('#grupo_insere_grupo').val(), descricao: $("#grupo_insere_descricao").val(), permissoes: _permissoes}, function(data){
+        $('.gerencia').trigger('click');
+        $('#modalInsereGrupo').modal('hide');
+      });
+
+    });
+
+    $('body').on('submit', '.alteraGrupoForm', function(ev){
+      ev.preventDefault();
+      var _permissoes = [];
+
+      $.each($('.tabela-add-permissao tr[idpermissao]'), function(k, v){
+        _permissoes.push($(v).attr('idpermissao'));
+      });
+
+      $.Model.alteraGrupo({id: $("#grupo_altera_id").val(), nome: $('#grupo_altera_grupo').val(), descricao: $("#grupo_altera_descricao").val(), permissoes: _permissoes}, function(data){
+        $('.gerencia').trigger('click');
+        $('#modalAlteraGrupo').modal('hide');
+      });
+    });
+
+    $('body').on('click', '.delete-grupo', function(ev){
+      ev.stopPropagation();
+      var _id = $(this).attr("grupo");
+
+      $.Model.removeGrupo({action: "grupos/" + _id, data: {}}, function(data){
+        $('.gerencia').trigger('click');
+      });
+    });
+
     $('body').on('click', '.insere-permissao', function(ev){
       var _id = $('#select-permissao').val();
       var _descricao = $('#select-permissao [value="'+ _id +'"]').text();
       $('.tabela-insere-permissao').prepend('<tr idpermissao="'+ _id +'"><td>'+ _descricao +'</td><td class="text-center"><i class="fas fa-trash-alt fa-2x text-danger delete-permissao"></i></td></tr>')
+    });
+
+    $('body').on('click', '.insere-permissao-altera', function(ev){
+      var _id = $('#altera-permissao-grupo').val();
+      var _descricao = $('#altera-permissao-grupo [value="'+ _id +'"]').text();
+      $('.tabela-add-permissao ').prepend('<tr idpermissao="'+ _id +'"><td>'+ _descricao +'</td><td class="text-center"><i class="fas fa-trash-alt fa-2x text-danger delete-permissao"></i></td></tr>')
     });
 
     $('body').on('click', '.delete-permissao', function(ev){
