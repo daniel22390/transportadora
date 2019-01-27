@@ -59,7 +59,35 @@ $.Model = {
     });
   },
 
+  alteraCargo: function(params, callback){
+    $.ajax({
+      url: url + "cargos/" + params.id,
+      headers: {Authorization: 'Bearer ' + $.Model.getCookie('token')}, 
+      method: "put",
+      crossDomain: true,
+      dataType: 'json',
+      data: params
+    })
+    .done(callback)
+    .fail(function(error){
+    });
+  },
+
   insereUsuario: function(params, callback){
+    $.ajax({
+      url: url + params.action,
+      headers: {Authorization: 'Bearer ' + $.Model.getCookie('token')}, 
+      method: "post",
+      crossDomain: true,
+      dataType: 'json',
+      data: params.data
+    })
+    .done(callback)
+    .fail(function(error){
+    });
+  },
+
+  insereCargo: function(params, callback){
     $.ajax({
       url: url + params.action,
       headers: {Authorization: 'Bearer ' + $.Model.getCookie('token')}, 
@@ -115,6 +143,21 @@ $.Model = {
     });
   },
 
+  carregaCargos: function(params, callback){
+    $.ajax({
+      url: url + "cargos",
+      headers: {Authorization: 'Bearer ' + $.Model.getCookie('token')}, 
+      method: "get",
+      crossDomain: true,
+      dataType: 'json',
+      data: params
+    })
+    .done(callback)
+    .fail(function(error){
+    });
+  },
+
+
   carregaGrupo: function(params, callback){
     $.ajax({
       url: url + "grupos/" + params.id,
@@ -129,7 +172,35 @@ $.Model = {
     });
   },
 
+  carregaCargo: function(params, callback){
+    $.ajax({
+      url: url + "cargos/" + params.id,
+      headers: {Authorization: 'Bearer ' + $.Model.getCookie('token')}, 
+      method: "get",
+      crossDomain: true,
+      dataType: 'json',
+      data: params
+    })
+    .done(callback)
+    .fail(function(error){
+    });
+  },
+
   removeGrupo: function(params, callback){
+    $.ajax({
+      url: url + params.action,
+      headers: {Authorization: 'Bearer ' + $.Model.getCookie('token')}, 
+      method: "delete",
+      crossDomain: true,
+      dataType: 'json',
+      data: params.data
+    })
+    .done(callback)
+    .fail(function(error){
+    });
+  },
+
+  removeCargo: function(params, callback){
     $.ajax({
       url: url + params.action,
       headers: {Authorization: 'Bearer ' + $.Model.getCookie('token')}, 
