@@ -5,3 +5,8 @@
 .permissoes i{
     margin-right: 5px;
 }
+
+.gerencia-body .card-body{
+    max-height: 400px;
+    overflow-y: auto;
+}

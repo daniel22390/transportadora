@@ -23,6 +23,20 @@ $.Gerencia = {};
 
 $.Gerencia = {
 
+  alertas: {
+    confirmacao: function(texto, callback){
+      Swal.fire({
+        title: texto,
+        type: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sim!',
+        cancelButtonText: "Não!"
+      }).then(callback);
+    }
+  },
+
   //acoes relativas ao card de cargos
   Cargos: {
 
@@ -66,7 +80,6 @@ $.Gerencia = {
 
     //carrega form para inserir um novo cargo
     carregaFormInsercao: function(){
-      $('#modalInsereCargo').modal();
       $('#modalInsereCargo').modal('show');
     },
 
@@ -79,7 +92,6 @@ $.Gerencia = {
         $('#descricao_altera_cargo').val(data.descricao);
       });
 
-      $('#modalAlteraCargo').modal();
       $('#modalAlteraCargo').modal('show');
     }
   },
@@ -143,7 +155,6 @@ $.Gerencia = {
 
     //carrega form para inserir um novo grupo
     carregaFormInsercao: function(){
-      $('#modalInsereGrupo').modal();
       $('#modalInsereGrupo').modal('show');
 
       $.Model.carregaPermissoes({}, function(data){
@@ -181,7 +192,6 @@ $.Gerencia = {
         $('#altera-permissao-grupo').html(_html);
       });
 
-      $('#modalAlteraGrupo').modal();
       $('#modalAlteraGrupo').modal('show');
     }
   },
@@ -252,7 +262,6 @@ $.Gerencia = {
         $('#grupo_insere_usuario').html(_html);
       });
 
-      $('#modalInsereUsuario').modal();
       $('#modalInsereUsuario').modal('show');
     },
 
@@ -301,12 +310,69 @@ $.Gerencia = {
           });    
         });
       });
-      $('#modalAlteraUsuario').modal();
       $('#modalAlteraUsuario').modal('show');
     }
   },
 
   events: function(){
+
+    //eventos relativos aos modais
+
+    $('#modalInsereCargo').modal({
+      show: false
+    });
+
+    $('#modalInsereCargo').on('show.bs.modal', function (e) {
+      $('#modalInsereCargo input[type="text"]').val('');
+    });
+
+    $('#modalAlteraCargo').modal({
+      show: false
+    });
+
+    $('#modalAlteraCargo').on('show.bs.modal', function (e) {
+      $('#modalAlteraCargo input[type="text"]').val('');
+    });
+
+    $('#modalInsereGrupo').modal({
+      show: false
+    });
+
+    $('#modalInsereGrupo').on('show.bs.modal', function (e) {
+      $('#modalInsereGrupo input[type="text"]').val('');
+      $('#modalInsereGrupo tbody tr[idpermissao]').remove();
+    });
+
+    $('#modalAlteraGrupo').modal({
+      show: false
+    });
+
+    $('#modalAlteraGrupo').on('show.bs.modal', function (e) {
+      $('#modalAlteraGrupo input[type="text"]').val('');
+      $('#modalAlteraGrupo tbody tr[idpermissao]').remove();
+    });
+
+    $('#modalInsereUsuario').modal({
+      show: false
+    });
+
+    $('#modalInsereUsuario').on('show.bs.modal', function (e) {
+      $('#modalInsereUsuario input[type="text"]').val('');
+      $('#modalInsereUsuario input[type="email"]').val('');
+      $('#modalInsereUsuario input[type="password"]').val('');
+    });
+
+    $('#modalAlteraUsuario').modal({
+      show: false
+    });
+
+    $('#modalAlteraUsuario').on('show.bs.modal', function (e) {
+      $('#modalAlteraUsuario input[type="text"]').val('');
+      $('#modalAlteraUsuario input[type="email"]').val('');
+      $('#modalAlteraUsuario input[type="password"]').val('');
+    });
+
+    //clique na pagina de gerencia
 
     $('body').on('click', '.gerencia', function(ev){
       $.Gerencia.Usuarios.carrega();
@@ -319,12 +385,19 @@ $.Gerencia = {
     $('body').on('click', '.delete-usuario', function(ev){
       ev.stopPropagation();
       var _id = $(this).attr("usuario");
-      $.Gerencia.Usuarios.delete(_id);  
+      
+      $.Gerencia.alertas.confirmacao('Confirma a exclusão desse usuário?', function(result){
+        if(result.value)
+          $.Gerencia.Usuarios.delete(_id);  
+      });
     });
 
     $('body').on('submit', ".form_addususario", function(ev){
       ev.preventDefault();
-      $.Gerencia.Usuarios.cria();
+      $.Gerencia.alertas.confirmacao('Confirma a adição desse usuário?', function(result){
+        if(result.value)
+          $.Gerencia.Usuarios.cria();
+      });
     });
 
     $('body').on('click', '.add_usuario', function(ev){
@@ -333,7 +406,11 @@ $.Gerencia = {
 
     $('body').on('submit', ".atualiza_usuario", function(ev){
       ev.preventDefault();
-      $.Gerencia.Usuarios.altera(this);
+      var _this = this;
+      $.Gerencia.alertas.confirmacao('Confirma a alteração desse usuário?', function(result){
+        if(result.value)
+          $.Gerencia.Usuarios.altera(_this);
+      });
     });
 
     $('body').on('click', '.table-usuarios tbody tr', function(ev){
@@ -352,18 +429,28 @@ $.Gerencia = {
 
     $('body').on('submit', '.insere-grupo', function(ev){
       ev.preventDefault();
-      $.Gerencia.Grupos.cria();
+      $.Gerencia.alertas.confirmacao('Confirma a adição desse grupo?', function(result){
+        if(result.value)
+          $.Gerencia.Grupos.cria();
+      });
     });
 
     $('body').on('submit', '.alteraGrupoForm', function(ev){
       ev.preventDefault();
-      $.Gerencia.Grupos.altera();
+      $.Gerencia.alertas.confirmacao('Confirma a alteração desse grupo?', function(result){
+        if(result.value)
+          $.Gerencia.Grupos.altera();
+      });
     });
 
     $('body').on('click', '.delete-grupo', function(ev){
       ev.stopPropagation();
       var _id = $(this).attr("grupo");
-      $.Gerencia.Grupos.delete(_id);
+      
+      $.Gerencia.alertas.confirmacao('Confirma a exclusão desse grupo?', function(result){
+        if(result.value)
+          $.Gerencia.Grupos.delete(_id);
+      });
     });
 
     //eventos relacionados ao cargo
@@ -374,7 +461,10 @@ $.Gerencia = {
 
     $('body').on('submit', ".form_addcargo", function(ev){
       ev.preventDefault();
-      $.Gerencia.Cargos.cria();
+      $.Gerencia.alertas.confirmacao('Confirma a adição desse cargo?', function(result){
+        if(result.value)
+          $.Gerencia.Cargos.cria();
+      });
     }); 
 
     $('body').on('click', '.tabela-cargos tbody tr', function(ev){
@@ -383,13 +473,20 @@ $.Gerencia = {
 
     $('body').on('submit', '.atualiza_cargo', function(ev){
       ev.preventDefault();
-      $.Gerencia.Cargos.altera();
+      $.Gerencia.alertas.confirmacao('Confirma a alteração desse cargo?', function(result){
+        if(result.value)
+          $.Gerencia.Cargos.altera();
+      });
     });
 
     $('body').on('click', '.delete-cargo', function(ev){
       ev.stopPropagation();
       var _id = $(this).attr("cargo");
-      $.Gerencia.Cargos.delete(_id);
+      
+      $.Gerencia.alertas.confirmacao('Confirma a exclusão desse cargo?', function(result){
+        if(result.value)
+          $.Gerencia.Cargos.delete(_id);
+      });
     });
 
     //eventos relacionados a permissoes

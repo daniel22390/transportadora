@@ -197,6 +197,11 @@ tbody tr{
   cursor: pointer;
 }
 
+.card-heading{
+  margin-top: 15px !important;
+  margin-bottom: 15px !important;
+}
+
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
