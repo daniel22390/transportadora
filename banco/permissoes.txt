@@ -1,0 +1,41 @@
+if(Usuario tem permissao de ver todos){
+    .Pode visualizar todos os elementos.
+    if(Usuario tem permissao de alterar todos)
+        Pode alterar qualquer elemento.
+    else
+        Pode altera somente os dele.
+    if(Usuario tem permissao de criar todos)
+        Pode criar qualquer elemento.
+    else
+        Pode criar somente os dele.
+    if(Usuario tem permissao de excluir todos)
+        Pode excluir qualquer elemento.
+    else
+        Pode excluir somente os dele.
+}
+else{
+    .Pode visualizar so os elementos dele.
+    if(Usuario tem permissao de alterar todos)
+        Pode alterar somente os dele.
+    else
+        Não pode alterar nenhum.
+    if(Usuario tem permissao de criar todos)
+        Pode criar somente os dele.
+    else
+        Não pode criar nenhum.
+    if(Usuario tem permissao de excluir todos)
+        Pode excluir somente os dele.
+    else
+        Não pode excluir nenhum.
+}
+
+
+
+*para usuarios
+
+if(usuario é gerente){
+    .Pode criar, alterar, ver e excluir todos os usuarios.
+}
+else{
+    .Pode apenas alterar o usuario dele.
+}
