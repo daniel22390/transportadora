@@ -465,7 +465,7 @@
                     <h1 class="card-heading">Localização</h1>
                   </div>
                   <div class="card-body">
-                    <div id="mapa" style="height: 517px;">
+                    <div id="mapa" style="height: 468px;">
 
                     </div>
                   </div>
@@ -661,6 +661,7 @@
               <div class="card">
                 <div class="card-content">
                   <div class="card-header-blue">
+                    <button type="button" class="btn add_usuario "><i class="fas fa-plus"></i></button>
                     <h1 class="card-heading">Usuários</h1>
                   </div>
                   <div class="card-body">
@@ -727,9 +728,6 @@
                         </tbody>
                       </table>
                     </div>
-                    <div class="text-right">
-                      <button type="button" class="btn add_usuario "><i class="fas fa-plus"></i></button>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -738,6 +736,7 @@
               <div class="card">
                 <div class="card-content">
                   <div class="card-header-blue">
+                    <button type="button" class="btn add_grupo "><i class="fas fa-plus"></i></button>
                     <h1 class="card-heading">Grupos</h1>
                   </div>
                   <div class="card-body">
@@ -777,9 +776,6 @@
                         </tbody>
                       </table>
                     </div>
-                    <div class="text-right">
-                      <button type="button" class="btn add_grupo "><i class="fas fa-plus"></i></button>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -788,6 +784,7 @@
               <div class="card">
                 <div class="card-content">
                   <div class="card-header-blue">
+                    <button type="button" class="btn add_cargo "><i class="fas fa-plus"></i></button>
                     <h1 class="card-heading">Cargos</h1>
                   </div>
                   <div class="card-body">
@@ -825,9 +822,6 @@
                           </tr> -->
                         </tbody>
                       </table>
-                    </div>
-                    <div class="text-right">
-                      <button type="button" class="btn add_cargo "><i class="fas fa-plus"></i></button>
                     </div>
                   </div>
                 </div>
@@ -1222,6 +1216,13 @@
                 <div class="form-group col-md-4">
                   <label for="nascimento_insere_usuario">Nascimento</label>
                   <input required name="nascimento" type="text" class="form-control" id="nascimento_insere_usuario" placeholder="Nascimento">
+                  <!-- <label for="nascimento_insere_usuario">Nascimento</label> 
+                  <div class="input-group date" data-provide="datepicker">
+                      <input required name="nascimento" type="text" class="form-control" id="nascimento_insere_usuario" placeholder="Nascimento">
+                      <div class="input-group-addon">
+                          <span class="glyphicon glyphicon-th"></span>
+                      </div>
+                  </div> -->
                 </div>
                 <div class="form-group col-md-4">
                   <label for="email_insere_usuario">Email</label>
@@ -1307,7 +1308,7 @@
 
                 <div class="form-group col-md-4">
                   <label for="senha_altera_usuario">Senha</label>
-                  <input required type="text" class="form-control" id="senha_altera_usuario" placeholder="Senha">
+                  <input type="password" class="form-control" id="senha_altera_usuario" placeholder="Senha">
                 </div>
               </div>
               <h3 class="text-center" style="margin-top: 10px;">Localização</h3>
@@ -1436,6 +1437,7 @@
     <script src="./js/bootstrap.min.js" ></script>
     <script src="./js/Chart.min.js" ></script>
     <script src="./js/moment.min.js" ></script>
+    <script src="./js/jquery.mask.js" ></script>
     <script src="./js/particular/model.js" ></script>
     <script src="./js/particular/produto.js" ></script>
     <script src="./js/particular/distribuidora.js" ></script>

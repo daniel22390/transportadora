@@ -3,6 +3,26 @@ body{
     font-family: Poppins,sans-serif;
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
 .container{
   padding: 0px;
   max-width: 100%;
@@ -202,6 +222,18 @@ tbody tr{
   margin-bottom: 15px !important;
 }
 
+.card-header-blue button{
+  position: absolute;
+  float: right;
+  right: 10px;
+  top: 10px;
+  padding: 5px 10px;
+  background-color: #37474f;
+}
+
+.card-body{
+  margin: 0;
+}
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {

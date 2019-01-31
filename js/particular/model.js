@@ -3,6 +3,14 @@ var url = "http://localhost:3000/";
 $.Model = {};
 
 $.Model = {
+  erro: function(error){
+    Swal.fire({
+      type: 'error',
+      title: 'Erro',
+      text: error.statusText,
+    });
+  },
+
   carregaUsuario: function(params, callback){
     $.ajax({
       url: url + "usuario",
@@ -98,6 +106,7 @@ $.Model = {
     })
     .done(callback)
     .fail(function(error){
+      $.Model.erro(error);
     });
   },
 

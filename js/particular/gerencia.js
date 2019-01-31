@@ -222,6 +222,7 @@ $.Gerencia = {
 
     //cria um novo usuario
     cria: function(){
+      $('#nascimento_insere_usuario').val((moment( $('#nascimento_insere_usuario').val(), 'DD-MM-YYYY' ).format()));
       $.Model.insereUsuario({action: "usuarios", data: $('.form_addususario').serialize()}, function(data){
         $('.gerencia').trigger('click');
         $('#modalInsereUsuario').modal('hide');
@@ -230,7 +231,8 @@ $.Gerencia = {
 
     //altera um determinado usuario
     altera: function(elem){
-      var serializado = $(elem).serialize() + ($('#senha_altera_usuario').val() === "" ? "" : ("&password=" + $('#senha_altera_usuario').val()));
+      $('#nascimento_altera_usuario').val((moment( $('#nascimento_altera_usuario').val(), 'DD-MM-YYYY' ).format()));
+      var serializado = $(elem).serialize() + ($('#senha_altera_usuario').val() === "" ? "&notpass=1" : ("&password=" + $('#senha_altera_usuario').val()));
       $.Model.atualizaUsuario({action: $(elem).attr('action'), data: serializado}, function(data){
         $('.gerencia').trigger('click');
         $('#modalAlteraUsuario').modal('hide');
@@ -263,6 +265,8 @@ $.Gerencia = {
       });
 
       $('#modalInsereUsuario').modal('show');
+      $('#nascimento_insere_usuario').mask('00/00/0000');
+      $('#telefone_insere_usuario').mask('(00)000000000');
     },
 
     //carrega form para alteracao de um usuario
@@ -311,6 +315,8 @@ $.Gerencia = {
         });
       });
       $('#modalAlteraUsuario').modal('show');
+      $('#nascimento_altera_usuario').mask('00/00/0000');
+      $('#telefone_altera_usuario').mask('(00)000000000');
     }
   },
 
