@@ -218,8 +218,8 @@ tbody tr{
 }
 
 .card-heading{
-  margin-top: 15px !important;
-  margin-bottom: 15px !important;
+  margin-top: 11px !important;
+  margin-bottom: 11px !important;
 }
 
 .card-header-blue button{
@@ -227,7 +227,7 @@ tbody tr{
   float: right;
   right: 10px;
   top: 10px;
-  padding: 5px 10px;
+  /* padding: 5px 10px; */
   background-color: #37474f;
 }
 
