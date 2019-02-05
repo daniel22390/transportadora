@@ -1084,45 +1084,64 @@
       </div>
     </div>
 
-     <!-- Modal -->
-     <div class="modal fade bd-example-modal-lg" id="modalInsereVeiculo" tabindex="-1" role="dialog" aria-labelledby="inserirVeiculo" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <form>
-              <div class="modal-header">
-                <h5 class="modal-title" id="inserirVeiculo">Adicionar Veículo</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="marca_insere_veiculo">Marca</label>
-                    <input type="text" class="form-control" id="marca_insere_veiculo" placeholder="Marca">
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="modelo_insere_veiculo">Modelo</label>
-                    <input type="text" class="form-control" id="modelo_insere_veiculo" placeholder="Modelo">
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="capacidade_insere_veiculo">Capacidade</label>
-                    <input type="text" class="form-control" id="capacidade_insere_veiculo" placeholder="Capacidade">
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="rodagem_insere_veiculo">Rodagem</label>
-                    <input type="text" class="form-control" id="rodagem_insere_veiculo" placeholder="Rodagem">
+    <!-- Modal -->
+    <div class="modal fade bd-example-modal-lg" id="modalInsereVeiculo" tabindex="-1" role="dialog" aria-labelledby="inserirVeiculo" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <form class="form-insere-veiculo">
+            <div class="modal-header">
+              <h5 class="modal-title" id="inserirVeiculo">Adicionar Veículo</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-row">
+                <div class="form-group col-md-4">
+                  <label for="placa_insere_veiculo">Placa</label>
+                  <input type="text" pattern=".{8}" required class="form-control" id="placa_insere_veiculo" placeholder="Placa">
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="capacidade_insere_veiculo">Capacidade (Ton)</label>
+                  <input type="number" class="form-control" id="capacidade_insere_veiculo" placeholder="Capacidade">
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="rodagem_insere_veiculo">Rodagem (Km)</label>
+                  <input type="number" class="form-control" id="rodagem_insere_veiculo" placeholder="Rodagem">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="marca_insere_veiculo">Marca</label>
+                  <input type="text" required class="form-control" id="marca_insere_veiculo" placeholder="Marca">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="modelo_insere_veiculo">Modelo</label>
+                  <input type="text" required class="form-control" id="modelo_insere_veiculo" placeholder="Modelo">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="usuario_insere_veiculo">Usuário</label>
+                  <select class="custom-select" id="usuario_insere_veiculo">
+                    
+                  </select>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="imagem_insere_veiculo">Imagem</label>
+                  <div class="input-group">
+                    <div class="custom-file">
+                      <input accept="image/png, image/jpeg" type="file" class="custom-file-input" id="imagem_insere_veiculo" aria-describedby="inputGroupFileAddon03">
+                      <label class="custom-file-label" for="imagem_insere_veiculo">Choose file</label>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                <button type="button" class="btn btn-primary">Salvar</button>
-              </div>
-            </form>
-          </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+              <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
+          </form>
         </div>
       </div>
+    </div>
 
     <!-- Modais de gerencia -->
 
@@ -1432,6 +1451,7 @@
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="./js/jquery-3.3.1.min.js" ></script>
+    <script src="./js/jquery.form.js" ></script>
     <script src="./js/popper.min.js" ></script>
     <script src="./js/sweetalert2.all.min.js" ></script>
     <script src="./js/bootstrap.min.js" ></script>

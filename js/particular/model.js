@@ -11,6 +11,23 @@ $.Model = {
     });
   },
 
+  insereVeiculo: function(params, callback){
+    $.ajax({
+      url: url + "veiculos",
+      headers: {Authorization: 'Bearer ' + $.Model.getCookie('token')}, 
+      method: "post",
+      crossDomain: true,
+      dataType: 'json',
+      data: params.data.erro,
+      processData: false,
+      cache:false,
+      contentType: false,
+    })
+    .done(callback)
+    .fail(function(error){
+    });
+  },
+
   carregaUsuario: function(params, callback){
     $.ajax({
       url: url + "usuario",
@@ -96,6 +113,21 @@ $.Model = {
   },
 
   insereCargo: function(params, callback){
+    $.ajax({
+      url: url + params.action,
+      headers: {Authorization: 'Bearer ' + $.Model.getCookie('token')}, 
+      method: "post",
+      crossDomain: true,
+      dataType: 'json',
+      data: params.data
+    })
+    .done(callback)
+    .fail(function(error){
+      $.Model.erro(error);
+    });
+  },
+
+  insereVeiculo: function(params, callback){
     $.ajax({
       url: url + params.action,
       headers: {Authorization: 'Bearer ' + $.Model.getCookie('token')}, 
