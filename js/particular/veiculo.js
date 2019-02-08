@@ -3,7 +3,6 @@ $.Veiculo = {};
 $.Veiculo = {
   carrega: function(){
     $.ModelVeiculos.carregaVeiculos({}, function(data){
-      console.log(data);
       var _html = "";
       $.each(data, function(k, v){
         _html += "<tr id_veiculo='" + v.idveiculo + "'>";
