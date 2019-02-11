@@ -212,6 +212,7 @@ $.Gerencia = {
           _html += ' <td>'+ v.usuario +'</td>';
           _html += ' <td>'+ v.email +'</td>';
           _html += ' <td>'+ v.telefone +'</td>';
+          _html += ' <td>'+ (v.ativo === true ? 'Sim' : 'Não') +'</td>';
           _html += ' <td>'+ v.Grupo.nome +'</td>';
           _html += ' <td class="text-center"><i class="fas fa-trash-alt text-danger delete-usuario" usuario="'+ v.idusuario +'"></i></td>';
           _html += '</tr>';
@@ -309,7 +310,7 @@ $.Gerencia = {
             $('#telefone_altera_usuario').val(data.telefone);
             $('#grupo_altera_usuario').val(data.grupo_idgrupo);
             $('#usuario_altera_usuario').val(data.usuario);
-
+            $('#ativo_altera_usuario').val(data.ativo + "");
             $(".atualiza_usuario").attr('action', 'usuarios/' + data.idusuario);
           });    
         });

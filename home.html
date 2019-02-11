@@ -677,6 +677,7 @@
                             <th scope="col">Usuário</th>
                             <th scope="col">Email</th>
                             <th scope="col">Telefone</th>
+                            <th scope="col">Ativo?</th>
                             <th scope="col">Grupo</th>
                             <th scope="col" class="text-center  ">Ações</th>
                           </tr>
@@ -1221,16 +1222,23 @@
             </div>
             <div class="modal-body">
               <div class="form-row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                   <label for="nome_insere_usuario">Nome</label>
                   <input required name="nome" type="text" class="form-control" id="nome_insere_usuario" placeholder="Nome">
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                   <label for="cargo_insere_usuario">Cargo</label>
                   <select name="cargo_idcargo" class="custom-select" id="cargo_insere_usuario">
                     <!-- <option value="Motorista">Motorista</option>
                     <option value="Entregador">Entregador</option>
                     <option value="Gerente">Gerente</option> -->
+                  </select>
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="ativo_insere_usuario">Ativo</label>
+                  <select name="ativo" class="custom-select" id="ativo_insere_usuario">
+                    <option value="true">Sim</option>
+                    <option value="false">Não</option>
                   </select>
                 </div>
                 <div class="form-group col-md-4">
@@ -1290,16 +1298,23 @@
             </div>
             <div class="modal-body">
               <div class="form-row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                   <label for="nome_altera_usuario">Nome</label>
                   <input required type="text" name="nome" class="form-control" id="nome_altera_usuario" placeholder="Nome">
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                   <label for="cargo_altera_usuario">Cargo</label>
                   <select name="cargo_idcargo" class="custom-select" id="cargo_altera_usuario">
                     <!-- <option value="Motorista">Motorista</option>
                     <option value="Entregador">Entregador</option>
                     <option value="Gerente">Gerente</option> -->
+                  </select>
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="ativo_altera_usuario">Ativo</label>
+                  <select name="ativo" class="custom-select" id="ativo_altera_usuario">
+                    <option value="true">Sim</option>
+                    <option value="false">Não</option>
                   </select>
                 </div>
                 <div class="form-group col-md-4">
