@@ -435,6 +435,12 @@ $.Gerencia = {
     //clique na pagina de gerencia
 
     $('body').on('click', '.gerencia', function(ev){
+      $('.table-usuarios').attr('page', '0');
+      $('.table-usuarios tbody').html('');
+      $('.tabela-cargos').attr('page', '0');
+      $('.tabela-cargos tbody').html('');
+      $('.tabela-grupos').attr('page', '0');
+      $('.tabela-grupos tbody').html('');
       $.Gerencia.Usuarios.carrega();
       $.Gerencia.Grupos.carrega();
       $.Gerencia.Cargos.carrega();
