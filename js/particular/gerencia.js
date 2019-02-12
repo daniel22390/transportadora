@@ -19,6 +19,8 @@ var $permissoes = {
   18: {icon: "fas fa-edit", color: "text-success", desc: "Visualização de Gerência."}
 };
 
+var $run_usuarios = false, $run_grupos = false, $run_cargos = false;
+
 $.Gerencia = {};
 
 $.Gerencia = {
@@ -40,9 +42,15 @@ $.Gerencia = {
   //acoes relativas ao card de cargos
   Cargos: {
 
-    //carrega a tabela de cargos
-    carrega: function(){
-      $.Model.carregaCargos({}, function(data){
+    scrollCargos: function(){
+      if(($('.card-cargos table').height() - $('.card-cargos').height() - 30) < $('.card-cargos').scrollTop() && !$run_cargos){
+        $.Gerencia.Cargos.carregaCargos();
+      }
+    },
+
+    carregaCargos: function(){
+      $('.tabela-cargos').attr('page',  parseInt($('.tabela-cargos').attr('page')) + 1);
+      $.Model.carregaCargos({page: $('.tabela-cargos').attr('page')}, function(data){
         var _html = "";
         $.each(data, function(k, v){
           _html += '<tr idcargo="'+ v.idcargo +'">'+
@@ -51,8 +59,19 @@ $.Gerencia = {
             '<td>' + v.descricao + '</td>';
           _html += '<td class="text-center"><i cargo="'+ v.idcargo +'" class="fas fa-trash-alt text-danger delete-cargo"></i></td></tr>';
         });
-        $('.tabela-cargos tbody').html(_html);
+        $('.tabela-cargos tbody').append(_html);
+
+        if($('.card-cargos table').height() <= $('.card-cargos').height() && data.length > 0){
+          $.Gerencia.Cargos.carregaCargos();
+        }
+        $run_cargos = false;
       });
+    },
+
+    //carrega a tabela de cargos
+    carrega: function(){
+      $('.tabela-cargos').attr('page', '0');
+      $.Gerencia.Cargos.carregaCargos();
     },
 
     //cria um novo cargo
@@ -99,9 +118,15 @@ $.Gerencia = {
   //acoes relativas ao card de grupos
   Grupos: {
 
-    //carrega a tabela de grupos
-    carrega: function(){
-      $.Model.carregaGrupos({}, function(data){
+    scrollGrupos: function(){
+      if(($('.card-grupos table').height() - $('.card-grupos').height() - 30) < $('.card-grupos').scrollTop() && !$run_grupos){
+        $.Gerencia.Grupos.carregaGrupos();
+      }
+    },
+
+    carregaGrupos: function(){
+      $('.tabela-grupos').attr('page',  parseInt($('.tabela-grupos').attr('page')) + 1);
+      $.Model.carregaGrupos({page: $('.tabela-grupos').attr('page')}, function(data){
         var _html = "";
         $.each(data, function(k, v){
           _html += '<tr idgrupo="'+ v.idgrupo +'">'+
@@ -114,9 +139,20 @@ $.Gerencia = {
             });
            _html += '</td><td class="text-center"><i grupo="'+ v.idgrupo +'" class="fas fa-trash-alt text-danger delete-grupo"></i></td></tr>';
         });
-        $('.tabela-grupos tbody').html(_html);
+        $('.tabela-grupos tbody').append(_html);
+
+        if($('.card-grupos table').height() <= $('.card-grupos').height() && data.length > 0){
+          $.Gerencia.Grupos.carregaGrupos();
+        }
+        $run_grupos = false;
         $('[data-toggle="tooltip"]').tooltip()
       });
+    },
+
+    //carrega a tabela de grupos
+    carrega: function(){
+      $('.tabela-grupos').attr('page', '0');
+      $.Gerencia.Grupos.carregaGrupos();
     },
 
     //cria um novo grupo
@@ -198,10 +234,15 @@ $.Gerencia = {
 
   //acoes relativas ao card de usuarios
   Usuarios: {
+    scrollUsuarios: function(){
+      if(($('.card-usuarios table').height() - $('.card-usuarios').height() - 30) < $('.card-usuarios').scrollTop() && !$run_usuarios){
+        $.Gerencia.Usuarios.carregaUsuarios();
+      }
+    },
 
-    //carrega a tabela de usuarios
-    carrega: function(){
-      $.Model.carregaUsuarios({}, function(data){
+    carregaUsuarios: function(){
+      $('.table-usuarios').attr('page',  parseInt($('.table-usuarios').attr('page')) + 1);
+      $.Model.carregaUsuarios({page: $('.table-usuarios').attr('page')}, function(data){
         var _html = "";
         $.each(data, function(k, v){
           _html += '<tr usuario="'+ v.idusuario +'">';
@@ -217,8 +258,20 @@ $.Gerencia = {
           _html += ' <td class="text-center"><i class="fas fa-trash-alt text-danger delete-usuario" usuario="'+ v.idusuario +'"></i></td>';
           _html += '</tr>';
         });
-        $('.table-usuarios tbody').html(_html);
+        $('.table-usuarios tbody').append(_html);
+
+        if($('.card-usuarios table').height() <= $('.card-usuarios').height() && data.length > 0){
+          $.Gerencia.Usuarios.carregaUsuarios();
+        }
+
+        $run_usuarios = false;
       });
+    },
+
+    //carrega a tabela de usuarios
+    carrega: function(){
+      $('.table-usuarios').attr('page', '0');
+      $.Gerencia.Usuarios.carregaUsuarios();
     },
 
     //cria um novo usuario
@@ -386,6 +439,18 @@ $.Gerencia = {
       $.Gerencia.Grupos.carrega();
       $.Gerencia.Cargos.carrega();
     });
+
+    document.addEventListener('scroll', function (event) {
+      if ($(event.target).hasClass('card-usuarios')) { // or any other filtering condition        
+        $.Gerencia.Usuarios.scrollUsuarios();
+      }
+      else if ($(event.target).hasClass('card-grupos')) { // or any other filtering condition        
+        $.Gerencia.Grupos.scrollGrupos();
+      }
+      else if ($(event.target).hasClass('card-cargos')) { // or any other filtering condition        
+        $.Gerencia.Cargos.scrollCargos();
+      }
+    }, true /*Capture event*/);
 
     //eventos relacionados ao usuario
 

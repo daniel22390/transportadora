@@ -157,6 +157,7 @@ $.Model = {
   },
 
   carregaUsuarios: function(params, callback){
+    $run_usuarios = true;
     $.ajax({
       url: url + "usuarios",
       headers: {Authorization: 'Bearer ' + $.Model.getCookie('token')}, 
@@ -167,24 +168,12 @@ $.Model = {
     })
     .done(callback)
     .fail(function(error){
-    });
-  },
-
-  carregaGrupos: function(params, callback){
-    $.ajax({
-      url: url + "grupos",
-      headers: {Authorization: 'Bearer ' + $.Model.getCookie('token')}, 
-      method: "get",
-      crossDomain: true,
-      dataType: 'json',
-      data: params
-    })
-    .done(callback)
-    .fail(function(error){
+      $run_usuarios = false;
     });
   },
 
   carregaCargos: function(params, callback){
+    $run_cargos = true;
     $.ajax({
       url: url + "cargos",
       headers: {Authorization: 'Bearer ' + $.Model.getCookie('token')}, 
@@ -195,6 +184,7 @@ $.Model = {
     })
     .done(callback)
     .fail(function(error){
+      $run_cargos = false;
     });
   },
 
@@ -255,21 +245,8 @@ $.Model = {
     });
   },
 
-  carregaCargos: function(params, callback){
-    $.ajax({
-      url: url + "cargos",
-      headers: {Authorization: 'Bearer ' + $.Model.getCookie('token')}, 
-      method: "get",
-      crossDomain: true,
-      dataType: 'json',
-      data: params
-    })
-    .done(callback)
-    .fail(function(error){
-    });
-  },
-
   carregaGrupos: function(params, callback){
+    $run_grupos = true;
     $.ajax({
       url: url + "grupos",
       headers: {Authorization: 'Bearer ' + $.Model.getCookie('token')}, 
@@ -280,6 +257,7 @@ $.Model = {
     })
     .done(callback)
     .fail(function(error){
+      $run_grupos = false;
     });
   },
 

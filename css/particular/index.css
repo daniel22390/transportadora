@@ -1,6 +1,7 @@
 body{
     background-color: #eeeeee;
     font-family: Poppins,sans-serif;
+    font-size: 13px;
 }
 
 ::-webkit-scrollbar {
@@ -218,15 +219,15 @@ tbody tr{
 }
 
 .card-heading{
-  margin-top: 11px !important;
-  margin-bottom: 11px !important;
+  margin-top: 5px !important;
+  margin-bottom: 5px !important;
 }
 
 .card-header-blue button{
   position: absolute;
   float: right;
   right: 10px;
-  top: 10px;
+  top: 4px;
   /* padding: 5px 10px; */
   background-color: #37474f;
 }
