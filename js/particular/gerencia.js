@@ -43,7 +43,7 @@ $.Gerencia = {
   Cargos: {
 
     scrollCargos: function(){
-      if(($('.card-cargos table').height() - $('.card-cargos').height() - 30) < $('.card-cargos').scrollTop() && !$run_cargos){
+      if(($('.card-cargos table').height() - $('.card-cargos').height() - 30) < $('.card-cargos').scrollTop() && !$run_cargos && $('.count-cargos .total').text() !== $('.count-cargos .parcial').text()){
         $.Gerencia.Cargos.carregaCargos();
       }
     },
@@ -52,7 +52,7 @@ $.Gerencia = {
       $('.tabela-cargos').attr('page',  parseInt($('.tabela-cargos').attr('page')) + 1);
       $.Model.carregaCargos({page: $('.tabela-cargos').attr('page')}, function(data){
         var _html = "";
-        $.each(data, function(k, v){
+        $.each(data.rows, function(k, v){
           _html += '<tr idcargo="'+ v.idcargo +'">'+
             '<td>'+ v.idcargo +'</td>'+
             '<td>'+ v.nome +'</td>'+
@@ -61,7 +61,9 @@ $.Gerencia = {
         });
         $('.tabela-cargos tbody').append(_html);
 
-        if($('.card-cargos table').height() <= $('.card-cargos').height() && data.length > 0){
+        $(".count-cargos").html('Exibindo <span class="total">' + $('.tabela-cargos tbody tr').length + "</span> de <span class='parcial'>" + data.count + "</span> resultados");
+
+        if($('.card-cargos table').height() <= $('.card-cargos').height() && data.rows.length > 0){
           $.Gerencia.Cargos.carregaCargos();
         }
         $run_cargos = false;
@@ -119,7 +121,7 @@ $.Gerencia = {
   Grupos: {
 
     scrollGrupos: function(){
-      if(($('.card-grupos table').height() - $('.card-grupos').height() - 30) < $('.card-grupos').scrollTop() && !$run_grupos){
+      if(($('.card-grupos table').height() - $('.card-grupos').height() - 30) < $('.card-grupos').scrollTop() && !$run_grupos && $('.count-grupos .total').text() !== $('.count-grupos .parcial').text()){
         $.Gerencia.Grupos.carregaGrupos();
       }
     },
@@ -128,7 +130,7 @@ $.Gerencia = {
       $('.tabela-grupos').attr('page',  parseInt($('.tabela-grupos').attr('page')) + 1);
       $.Model.carregaGrupos({page: $('.tabela-grupos').attr('page')}, function(data){
         var _html = "";
-        $.each(data, function(k, v){
+        $.each(data.rows, function(k, v){
           _html += '<tr idgrupo="'+ v.idgrupo +'">'+
             '<td>'+ v.idgrupo +'</td>'+
             '<td>'+ v.nome +'</td>'+
@@ -141,7 +143,9 @@ $.Gerencia = {
         });
         $('.tabela-grupos tbody').append(_html);
 
-        if($('.card-grupos table').height() <= $('.card-grupos').height() && data.length > 0){
+        $(".count-grupos").html('Exibindo <span class="total">' + $('.tabela-grupos tbody tr').length + "</span> de <span class='parcial'>" + data.count + "</span> resultados");
+
+        if($('.card-grupos table').height() <= $('.card-grupos').height() && data.rows.length > 0){
           $.Gerencia.Grupos.carregaGrupos();
         }
         $run_grupos = false;
@@ -235,7 +239,7 @@ $.Gerencia = {
   //acoes relativas ao card de usuarios
   Usuarios: {
     scrollUsuarios: function(){
-      if(($('.card-usuarios table').height() - $('.card-usuarios').height() - 30) < $('.card-usuarios').scrollTop() && !$run_usuarios){
+      if(($('.card-usuarios table').height() - $('.card-usuarios').height() - 30) < $('.card-usuarios').scrollTop() && !$run_usuarios && $('.count-usuarios .total').text() !== $('.count-usuarios .parcial').text()){
         $.Gerencia.Usuarios.carregaUsuarios();
       }
     },
@@ -244,7 +248,7 @@ $.Gerencia = {
       $('.table-usuarios').attr('page',  parseInt($('.table-usuarios').attr('page')) + 1);
       $.Model.carregaUsuarios({page: $('.table-usuarios').attr('page')}, function(data){
         var _html = "";
-        $.each(data, function(k, v){
+        $.each(data.rows, function(k, v){
           _html += '<tr usuario="'+ v.idusuario +'">';
           _html += ' <td>'+ v.idusuario +'</td>';
           _html += ' <td>'+ v.nome +'</td>';
@@ -260,7 +264,9 @@ $.Gerencia = {
         });
         $('.table-usuarios tbody').append(_html);
 
-        if($('.card-usuarios table').height() <= $('.card-usuarios').height() && data.length > 0){
+        $(".count-usuarios").html('Exibindo <span class="total">' + $('.table-usuarios tbody tr').length + "</span> de <span class='parcial'>" + data.count + "</span> resultados");
+
+        if($('.card-usuarios table').height() <= $('.card-usuarios').height() && data.rows.length > 0){
           $.Gerencia.Usuarios.carregaUsuarios();
         }
 
