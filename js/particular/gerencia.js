@@ -50,7 +50,9 @@ $.Gerencia = {
 
     carregaCargos: function(){
       $('.tabela-cargos').attr('page',  parseInt($('.tabela-cargos').attr('page')) + 1);
-      $.Model.carregaCargos({page: $('.tabela-cargos').attr('page')}, function(data){
+      var _data = $('.filtro-body[contexto="cargos"] .filtro').serialize();
+      _data += "&page=" + $('.tabela-cargos').attr('page');
+      $.Model.carregaCargos(_data, function(data){
         var _html = "";
         $.each(data.rows, function(k, v){
           _html += '<tr idcargo="'+ v.idcargo +'">'+
@@ -128,7 +130,9 @@ $.Gerencia = {
 
     carregaGrupos: function(){
       $('.tabela-grupos').attr('page',  parseInt($('.tabela-grupos').attr('page')) + 1);
-      $.Model.carregaGrupos({page: $('.tabela-grupos').attr('page')}, function(data){
+      var _data = $('.filtro-body[contexto="grupos"] .filtro').serialize();
+      _data += "&page=" + $('.tabela-grupos').attr('page');
+      $.Model.carregaGrupos(_data, function(data){
         var _html = "";
         $.each(data.rows, function(k, v){
           _html += '<tr idgrupo="'+ v.idgrupo +'">'+
@@ -602,6 +606,12 @@ $.Gerencia = {
     $('body').on('click', '.pesquisa', function(ev){
       var _contexto = $(this).attr('contexto');
       $('.filtro-body[contexto="'+ _contexto +'"]').toggleClass('open');
+
+      if($('.filtro-body[contexto="'+ _contexto +'"]').hasClass('open')){
+        if(_contexto === "grupos"){
+          
+        }
+      }
     }); 
 
 
@@ -612,6 +622,18 @@ $.Gerencia = {
         $('.table-usuarios').attr('page', '0');
         $('.table-usuarios tbody').html('');
         $.Gerencia.Usuarios.carrega();
+      }
+
+      else if($(this).parent().attr('contexto') === "grupos"){
+        $('.tabela-grupos').attr('page', '0');
+        $('.tabela-grupos tbody').html('');
+        $.Gerencia.Grupos.carrega();
+      }
+
+      else if($(this).parent().attr('contexto') === "cargos"){
+        $('.tabela-cargos').attr('page', '0');
+        $('.tabela-cargos tbody').html('');
+        $.Gerencia.Cargos.carrega();
       }
 
       $('.filtro-body[contexto="'+ $(this).parent().attr('contexto') +'"]').removeClass('open');

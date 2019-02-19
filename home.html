@@ -734,50 +734,6 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <!-- <tr>
-                            <th scope="row">1</th>
-                            <td>Daniel Gomes de Oliveira</td>
-                            <td>Motorista</td>
-                            <td>24/01/1988</td>
-                            <td>daniel_gomes</td>
-                            <td>daniel@hotmail.com</td>
-                            <td>(33) 999999999</td>
-                            <td>Operador</td>
-                            <td class="text-center"><i class="fas fa-trash-alt text-danger delete-usuario"></i></td>
-                          </tr>
-                          <tr>
-                            <th scope="row">2</th>
-                            <td>Marcos Antonio de Jesus</td>
-                            <td>Motorista</td>
-                            <td>22/05/1975</td>
-                            <td>marcos_antonio</td>
-                            <td>marcos@hotmail.com</td>
-                            <td>(33) 999999999</td>
-                            <td>Operador</td>
-                            <td class="text-center"><i class="fas fa-trash-alt text-danger delete-usuario"></i></td>
-                          </tr>
-                          <tr>
-                            <th scope="row">3</th>
-                            <td>Carlos José de Oliveira</td>
-                            <td>Entregador</td>
-                            <td>12/10/1982</td>
-                            <td>carlos_jose</td>
-                            <td>carlos@hotmail.com</td>
-                            <td>(33) 999999999</td>
-                            <td>Operador</td>
-                            <td class="text-center"><i class="fas fa-trash-alt text-danger delete-usuario"></i></td>
-                          </tr>
-                          <tr>
-                            <th scope="row">4</th>
-                            <td>João de Barros Queiroz</td>
-                            <td>Gerente</td>
-                            <td>12/07/1968</td>
-                            <td>joao_barros</td>
-                            <td>joao@hotmail.com</td>
-                            <td>(33) 999999999</td>
-                            <td>Administrador</td>
-                            <td class="text-center"><i class="fas fa-trash-alt text-danger delete-usuario"></i></td>
-                          </tr> -->
                         </tbody>
                       </table>
                     </div>
@@ -793,6 +749,29 @@
                     <button type="button" class="btn add_grupo btn-sm"><i class="fas fa-plus"></i></button>
                     <button type="button" contexto="grupos" class="btn pesquisa btn-sm"><i class="fas fa-filter"></i></button>
                     <h2 class="card-heading">Grupos</h2>
+                  </div>
+                  <div class="filtro-body" contexto="grupos">
+                    <form class="filtro" action="/grupos" method="GET">
+                      <div class="form-row">
+                        <div class="form-group col-md-1 col-sm-12">
+                          <label for="filtro_codigo_grupo">Código</label>
+                          <input type="number" name="search[idgrupo]" class="form-control" id="filtro_codigo_grupo">
+                        </div>
+                        <div class="form-group col-md-4 col-sm-12">
+                          <label for="filtro_nome_grupo">Nome</label>
+                          <input type="text" name="search[nome]" class="form-control" id="filtro_nome_grupo">
+                        </div>
+                        <div class="form-group col-md-4 col-sm-12">
+                          <label for="filtro_descricao_grupo">Descrição</label>
+                          <input type="text" name="search[descricao]" class="form-control" id="filtro_descricao_grupo">
+                        </div>
+                        <div class="form-group col-md-3 col-sm-12">
+                          <label for="filtro_permissao_grupo">Permissões</label>
+                          <input type="text" name="search[permissoes][]" class="form-control" id="filtro_permissao_grupo">
+                        </div>
+                      </div>
+                      <button type="submit" class="btn btn-sm">Pesquisar</button>
+                    </form>
                   </div>
                   <div class="card-body  card-grupos">
                     <div class="table-responsive">
@@ -843,6 +822,25 @@
                     <button type="button" class="btn add_cargo btn-sm"><i class="fas fa-plus"></i></button>
                     <button type="button" contexto="cargos" class="btn pesquisa btn-sm"><i class="fas fa-filter"></i></button>
                     <h2 class="card-heading">Cargos</h2>
+                  </div>
+                  <div class="filtro-body" contexto="cargos">
+                    <form class="filtro" action="/cargos" method="GET">
+                      <div class="form-row">
+                        <div class="form-group col-md-2 col-sm-12">
+                          <label for="filtro_codigo_cargo">Código</label>
+                          <input type="number" name="search[idcargo]" class="form-control" id="filtro_codigo_cargo">
+                        </div>
+                        <div class="form-group col-md-5 col-sm-12">
+                          <label for="filtro_nome_cargo">Nome</label>
+                          <input type="text" name="search[nome]" class="form-control" id="filtro_nome_cargo">
+                        </div>
+                        <div class="form-group col-md-5 col-sm-12">
+                          <label for="filtro_descricao_cargo">Descrição</label>
+                          <input type="text" name="search[descricao]" class="form-control" id="filtro_descricao_cargo">
+                        </div>
+                      </div>
+                      <button type="submit" class="btn btn-sm">Pesquisar</button>
+                    </form>
                   </div>
                   <div class="card-body card-cargos">
                     <div class="table-responsive">
