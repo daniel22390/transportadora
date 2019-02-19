@@ -663,7 +663,58 @@
                 <div class="card-content">
                   <div class="card-header-blue">
                     <button type="button" class="btn add_usuario btn-sm"><i class="fas fa-plus"></i></button>
+                    <button type="button" contexto="usuarios" class="btn pesquisa btn-sm"><i class="fas fa-filter"></i></button>
                     <h2 class="card-heading">Usuários</h2>
+                  </div>
+                  <div class="filtro-body" contexto="usuarios">
+                    <form class="filtro" action="/usuarios" method="GET">
+                      <div class="form-row">
+                        <div class="form-group col-md-2 col-sm-12">
+                          <label for="filtro_codigo_usuario">Código</label>
+                          <input type="number" name="search[idusuario]" class="form-control" id="filtro_codigo_usuario">
+                        </div>
+                        <div class="form-group col-md-3 col-sm-12">
+                          <label for="filtro_nome_usuario">Nome</label>
+                          <input type="text" name="search[nome]" class="form-control" id="filtro_nome_usuario">
+                        </div>
+                        <div class="form-group col-md-3 col-sm-12">
+                          <label for="filtro_cargo_usuario">Cargo</label>
+                          <select name="search[cargo_idcargo]" class="custom-select" id="filtro_cargo_usuario">
+                            
+                          </select>
+                        </div>
+                        <div class="form-group col-md-2 col-sm-12">
+                          <label for="filtro_nascimento_usuario">Nascimento</label>
+                          <input name="search[nascimento]" type="text" class="form-control" id="filtro_nascimento_usuario">
+                        </div>
+                        <div class="form-group col-md-2 col-sm-12">
+                          <label for="filtro_ativo_usuario">Ativo?</label>
+                          <select name="search[ativo]" class="custom-select" id="filtro_ativo_usuario">
+                            <option value="">Selecione</option>
+                            <option value="true">Sim</option>
+                            <option value="false">Não</option>
+                          </select>
+                        </div>
+                        <div class="form-group col-md-3 col-sm-12">
+                          <label for="filtro_usuario_usuario">Usuário</label>
+                          <input name="search[usuario]" type="text" class="form-control" id="filtro_usuario_usuario">
+                        </div>
+                        <div class="form-group col-md-3 col-sm-12">
+                          <label for="filtro_email_usuario">Email</label>
+                          <input name="search[email]" type="text" class="form-control" id="filtro_email_usuario">
+                        </div>
+                        <div class="form-group col-md-3 col-sm-12">
+                          <label for="filtro_telefone_usuario">Telefone</label>
+                          <input name="search[telefone]" type="text" class="form-control" id="filtro_telefone_usuario">
+                        </div>
+                        <div class="form-group col-md-3 col-sm-12">
+                          <label for="filtro_grupo_usuario">Grupo</label>
+                          <select name="search[grupo_idgrupo]" class="custom-select" id="filtro_grupo_usuario">
+                          </select>
+                        </div>
+                      </div>
+                      <button type="submit" class="btn btn-sm">Pesquisar</button>
+                    </form>
                   </div>
                   <div class="card-body card-usuarios">
                     <div class="table-responsive">
@@ -740,6 +791,7 @@
                 <div class="card-content">
                   <div class="card-header-blue">
                     <button type="button" class="btn add_grupo btn-sm"><i class="fas fa-plus"></i></button>
+                    <button type="button" contexto="grupos" class="btn pesquisa btn-sm"><i class="fas fa-filter"></i></button>
                     <h2 class="card-heading">Grupos</h2>
                   </div>
                   <div class="card-body  card-grupos">
@@ -789,6 +841,7 @@
                 <div class="card-content">
                   <div class="card-header-blue">
                     <button type="button" class="btn add_cargo btn-sm"><i class="fas fa-plus"></i></button>
+                    <button type="button" contexto="cargos" class="btn pesquisa btn-sm"><i class="fas fa-filter"></i></button>
                     <h2 class="card-heading">Cargos</h2>
                   </div>
                   <div class="card-body card-cargos">

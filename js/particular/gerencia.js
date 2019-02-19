@@ -246,7 +246,9 @@ $.Gerencia = {
 
     carregaUsuarios: function(){
       $('.table-usuarios').attr('page',  parseInt($('.table-usuarios').attr('page')) + 1);
-      $.Model.carregaUsuarios({page: $('.table-usuarios').attr('page')}, function(data){
+      var _data = $('.filtro-body[contexto="usuarios"] .filtro').serialize();
+      _data += "&page=" + $('.table-usuarios').attr('page');
+      $.Model.carregaUsuarios(_data, function(data){
         var _html = "";
         $.each(data.rows, function(k, v){
           _html += '<tr usuario="'+ v.idusuario +'">';
@@ -464,6 +466,12 @@ $.Gerencia = {
       }
     }, true /*Capture event*/);
 
+    $(document).on('click', function(ev){
+      if (!$(ev.target).closest(".filtro-body").length && !$(ev.target).closest(".pesquisa").length) {
+        $('.filtro-body').removeClass('open');
+      }
+    });
+
     //eventos relacionados ao usuario
 
     $('body').on('click', '.delete-usuario', function(ev){
@@ -590,5 +598,23 @@ $.Gerencia = {
     $('body').on('click', '.delete-permissao', function(ev){
       $(this).parent().parent().remove();
     }); 
+
+    $('body').on('click', '.pesquisa', function(ev){
+      var _contexto = $(this).attr('contexto');
+      $('.filtro-body[contexto="'+ _contexto +'"]').toggleClass('open');
+    }); 
+
+
+    $('body').on('submit', '.filtro', function(ev){
+      ev.preventDefault();
+
+      if($(this).parent().attr('contexto') === "usuarios"){
+        $('.table-usuarios').attr('page', '0');
+        $('.table-usuarios tbody').html('');
+        $.Gerencia.Usuarios.carrega();
+      }
+
+      $('.filtro-body[contexto="'+ $(this).parent().attr('contexto') +'"]').removeClass('open');
+    });
   }
 }

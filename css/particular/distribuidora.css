@@ -9,7 +9,8 @@
     /* border-bottom:3px solid #BBB; */
     padding:0px;
     margin-bottom: 20px;
-    overflow:hidden;
+    overflow: auto;
+    min-height: 300px;
     box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     font-family: 'Roboto', sans-serif;
     -webkit-transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
