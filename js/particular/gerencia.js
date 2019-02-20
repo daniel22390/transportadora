@@ -122,6 +122,21 @@ $.Gerencia = {
   //acoes relativas ao card de grupos
   Grupos: {
 
+    carregaFiltros: function(){
+      $('#filtro_permissao_grupo').select2();
+      $.Model.carregaPermissoes({}, function(data){
+        var _html = "'<option value=''>Selecione</option>";
+        $.each(data, function(k, v){
+          _html += '<option value="'+ v.idpermissao +'">'+ v.descricao +'</option>';
+        });
+        $('#filtro_permissao_grupo').html(_html);
+        $('#filtro_permissao_grupo').select2({
+          theme: "bootstrap",
+          dropdownParent: $('.filtro-body[contexto="grupos"]')
+        });
+      });
+    },
+
     scrollGrupos: function(){
       if(($('.card-grupos table').height() - $('.card-grupos').height() - 30) < $('.card-grupos').scrollTop() && !$run_grupos && $('.count-grupos .total').text() !== $('.count-grupos .parcial').text()){
         $.Gerencia.Grupos.carregaGrupos();
@@ -609,7 +624,7 @@ $.Gerencia = {
 
       if($('.filtro-body[contexto="'+ _contexto +'"]').hasClass('open')){
         if(_contexto === "grupos"){
-          
+          $.Gerencia.Grupos.carregaFiltros();
         }
       }
     }); 

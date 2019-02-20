@@ -8,6 +8,8 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/fontawesome/css/all.css">
+    <link rel="stylesheet" href="./css/select2.min.css">
+    <link rel="stylesheet" href="./css/select2-bootstrap.min.css">
     <link rel="stylesheet" href="./css/particular/index.css">
     <link rel="stylesheet" href="./css/particular/produto.css">
     <link rel="stylesheet" href="./css/particular/distribuidora.css">
@@ -753,21 +755,21 @@
                   <div class="filtro-body" contexto="grupos">
                     <form class="filtro" action="/grupos" method="GET">
                       <div class="form-row">
-                        <div class="form-group col-md-1 col-sm-12">
+                        <div class="form-group col-md-2 col-sm-12">
                           <label for="filtro_codigo_grupo">Código</label>
                           <input type="number" name="search[idgrupo]" class="form-control" id="filtro_codigo_grupo">
                         </div>
-                        <div class="form-group col-md-4 col-sm-12">
+                        <div class="form-group col-md-5 col-sm-12">
                           <label for="filtro_nome_grupo">Nome</label>
                           <input type="text" name="search[nome]" class="form-control" id="filtro_nome_grupo">
                         </div>
-                        <div class="form-group col-md-4 col-sm-12">
+                        <div class="form-group col-md-5 col-sm-12">
                           <label for="filtro_descricao_grupo">Descrição</label>
                           <input type="text" name="search[descricao]" class="form-control" id="filtro_descricao_grupo">
                         </div>
-                        <div class="form-group col-md-3 col-sm-12">
+                        <div class="form-group col-md-12 col-sm-12">
                           <label for="filtro_permissao_grupo">Permissões</label>
-                          <input type="text" name="search[permissoes][]" class="form-control" id="filtro_permissao_grupo">
+                          <select class="js-example-basic-multiple form-control" name="search[permissoes][]" id="filtro_permissao_grupo" multiple="multiple"></select>
                         </div>
                       </div>
                       <button type="submit" class="btn btn-sm">Pesquisar</button>
@@ -1528,6 +1530,7 @@
     <script src="./js/Chart.min.js" ></script>
     <script src="./js/moment.min.js" ></script>
     <script src="./js/jquery.mask.js" ></script>
+    <script src="./js/select2.min.js" ></script>
     <script src="./js/particular/model.js" ></script>
     <script src="./js/particular/produto.js" ></script>
     <script src="./js/particular/distribuidora.js" ></script>
