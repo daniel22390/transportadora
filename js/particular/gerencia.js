@@ -42,6 +42,10 @@ $.Gerencia = {
   //acoes relativas ao card de cargos
   Cargos: {
 
+    carregaFiltros: function(){
+
+    },
+
     scrollCargos: function(){
       if(($('.card-cargos table').height() - $('.card-cargos').height() - 30) < $('.card-cargos').scrollTop() && !$run_cargos && $('.count-cargos .total').text() !== $('.count-cargos .parcial').text()){
         $.Gerencia.Cargos.carregaCargos();
@@ -257,6 +261,82 @@ $.Gerencia = {
 
   //acoes relativas ao card de usuarios
   Usuarios: {
+    carregaFiltros: function(){
+      $('#filtro_nascimento_usuario').mask('00/00/0000');
+      $('#filtro_telefone_usuario').mask('(00)000000000');
+      $("#filtro_cargo_usuario").select2({
+        theme: "bootstrap",
+        dropdownParent: $('.filtro-body[contexto="usuarios"]'),
+        ajax: {
+          url: url + "cargos",
+          dataType: 'json',
+          headers: {
+            Authorization: 'Bearer ' + $.Model.getCookie('token'),
+            "Content-Type" : "application/json",
+          },
+          data: function (params) {
+            var query = {
+              search: params.term ? {nome: params.term} : {},
+              page: params.page || 1
+            }
+            return query;
+          },
+          processResults: function (data, params) {
+            var _results = [];
+            if(!params.page || params.page === 1)
+              _results.push({id: '', text: 'Selecione'});
+  
+            $.each(data.rows, function(k, v){
+              _results.push({id: v.idcargo, text: v.nome});
+            }); 
+            return {
+              results: _results,
+              pagination: {
+                more: (params.page ? (params.page * 20) : 20) < data.count
+              }
+            };
+          }
+        },
+        width: '100%'
+      });
+
+      $("#filtro_grupo_usuario").select2({
+        theme: "bootstrap",
+        dropdownParent: $('.filtro-body[contexto="usuarios"]'),
+        ajax: {
+          url: url + "grupos",
+          dataType: 'json',
+          headers: {
+            Authorization: 'Bearer ' + $.Model.getCookie('token'),
+            "Content-Type" : "application/json",
+          },
+          data: function (params) {
+            var query = {
+              search: params.term ? {nome: params.term} : {},
+              page: params.page || 1
+            }
+            return query;
+          },
+          processResults: function (data, params) {
+            var _results = [];
+            if(!params.page || params.page === 1)
+              _results.push({id: '', text: 'Selecione'});
+  
+            $.each(data.rows, function(k, v){
+              _results.push({id: v.idgrupo, text: v.nome});
+            }); 
+            return {
+              results: _results,
+              pagination: {
+                more: (params.page ? (params.page * 20) : 20) < data.count
+              }
+            };
+          }
+        },
+        width: '100%'
+      });
+    },
+
     scrollUsuarios: function(){
       if(($('.card-usuarios table').height() - $('.card-usuarios').height() - 30) < $('.card-usuarios').scrollTop() && !$run_usuarios && $('.count-usuarios .total').text() !== $('.count-usuarios .parcial').text()){
         $.Gerencia.Usuarios.carregaUsuarios();
@@ -264,8 +344,14 @@ $.Gerencia = {
     },
 
     carregaUsuarios: function(){
+
       $('.table-usuarios').attr('page',  parseInt($('.table-usuarios').attr('page')) + 1);
+      var _nascimento = $('#filtro_nascimento_usuario').val();
+      if(_nascimento !== ''){
+        $('#filtro_nascimento_usuario').val(moment(_nascimento , 'DD-MM-YYYY' ).format());
+      }
       var _data = $('.filtro-body[contexto="usuarios"] .filtro').serialize();
+      $('#filtro_nascimento_usuario').val(_nascimento);
       _data += "&page=" + $('.table-usuarios').attr('page');
       $.Model.carregaUsuarios(_data, function(data){
         var _html = "";
@@ -329,20 +415,76 @@ $.Gerencia = {
 
     //carrega form para inserir um novo usuario
     carregaFormInsercao: function(){
-      $.Model.carregaCargos({}, function(data){
-        let _html = "";
-        $.each(data, function(k, v){
-          _html += '<option value="'+ v.idcargo +'">'+ v.nome +'</option>';
-        });
-        $('#cargo_insere_usuario').html(_html);
+      $("#cargo_insere_usuario").select2({
+        theme: "bootstrap",
+        dropdownParent: $('#modalInsereUsuario'),
+        ajax: {
+          url: url + "cargos",
+          dataType: 'json',
+          headers: {
+            Authorization: 'Bearer ' + $.Model.getCookie('token'),
+            "Content-Type" : "application/json",
+          },
+          data: function (params) {
+            var query = {
+              search: params.term ? {nome: params.term} : {},
+              page: params.page || 1
+            }
+            return query;
+          },
+          processResults: function (data, params) {
+            var _results = [];
+            if(!params.page || params.page === 1)
+              _results.push({id: '', text: 'Selecione'});
+  
+            $.each(data.rows, function(k, v){
+              _results.push({id: v.idcargo, text: v.nome});
+            }); 
+            return {
+              results: _results,
+              pagination: {
+                more: (params.page ? (params.page * 20) : 20) < data.count
+              }
+            };
+          }
+        },
+        width: '100%'
       });
 
-      $.Model.carregaGrupos({}, function(data){
-        let _html = "";
-        $.each(data, function(k, v){
-          _html += '<option value="'+ v.idgrupo +'">'+ v.nome +'</option>';
-        });
-        $('#grupo_insere_usuario').html(_html);
+      $("#grupo_insere_usuario").select2({
+        theme: "bootstrap",
+        dropdownParent: $('#modalInsereUsuario'),
+        ajax: {
+          url: url + "grupos",
+          dataType: 'json',
+          headers: {
+            Authorization: 'Bearer ' + $.Model.getCookie('token'),
+            "Content-Type" : "application/json",
+          },
+          data: function (params) {
+            var query = {
+              search: params.term ? {nome: params.term} : {},
+              page: params.page || 1
+            }
+            return query;
+          },
+          processResults: function (data, params) {
+            var _results = [];
+            if(!params.page || params.page === 1)
+              _results.push({id: '', text: 'Selecione'});
+  
+            $.each(data.rows, function(k, v){
+              _results.push({id: v.idgrupo, text: v.nome});
+            }); 
+            return {
+              results: _results,
+              pagination: {
+                more: (params.page ? (params.page * 20) : 20) < data.count
+              }
+            };
+          }
+        },
+        width: '100%'
       });
 
       $('#modalInsereUsuario').modal('show');
@@ -370,11 +512,6 @@ $.Gerencia = {
 
       var _id = $(elem).attr('usuario');
       $.Model.carregaCargos({}, function(data){
-        let _html = "";
-        $.each(data, function(k, v){
-          _html += '<option value="'+ v.idcargo +'">'+ v.nome +'</option>';
-        });
-        $('#cargo_altera_usuario').html(_html);
         $.Model.carregaGrupos({}, function(data){
           let _html = "";
           $.each(data, function(k, v){
@@ -382,13 +519,99 @@ $.Gerencia = {
           });
           $('#grupo_altera_usuario').html(_html);
 
-          $.Model.carregaUsuarioId({id: _id}, function(data){
+          $.Model.carregaUsuarioId({id: _id}, function(data){ 
+            var _user_data = data;
+            $("#cargo_altera_usuario").select2({
+              theme: "bootstrap",
+              dropdownParent: $('#modalAlteraUsuario'),
+              ajax: {
+                url: url + "cargos",
+                dataType: 'json',
+                headers: {
+                  Authorization: 'Bearer ' + $.Model.getCookie('token'),
+                  "Content-Type" : "application/json",
+                },
+                data: function (params) {
+                  var query = {
+                    search: params.term ? {nome: params.term} : {},
+                    page: params.page || 1
+                  }
+                  return query;
+                },
+                processResults: function (data, params) {
+                  var _results = [];
+                  if(!params.page || params.page === 1){
+                    _results.push({id: '', text: 'Selecione'});
+                  }
+        
+                  $.each(data.rows, function(k, v){
+                    _results.push({id: v.idcargo, text: v.nome});
+                  }); 
+                  return {
+                    results: _results,
+                    pagination: {
+                      more: (params.page ? (params.page * 20) : 20) < data.count
+                    }
+                  };
+                }
+              },
+              width: '100%'
+            });
+
+            if(_user_data.Cargo && _user_data.Cargo.nome){
+              var $option = $("<option selected></option>").val( _user_data.Cargo.idcargo).text( _user_data.Cargo.nome);
+              $("#cargo_altera_usuario").append($option).trigger('change');
+            }
+
+            $("#grupo_altera_usuario").select2({
+              theme: "bootstrap",
+              dropdownParent: $('#modalAlteraUsuario'),
+              ajax: {
+                url: url + "grupos",
+                dataType: 'json',
+                headers: {
+                  Authorization: 'Bearer ' + $.Model.getCookie('token'),
+                  "Content-Type" : "application/json",
+                },
+                data: function (params) {
+                  var query = {
+                    search: params.term ? {nome: params.term} : {},
+                    page: params.page || 1
+                  }
+                  return query;
+                },
+                processResults: function (data, params) {
+                  var _results = [];
+                  if(!params.page || params.page === 1){
+                    _results.push({id: '', text: 'Selecione'});
+                  }
+        
+                  $.each(data.rows, function(k, v){
+                    _results.push({id: v.idcargo, text: v.nome});
+                  }); 
+                  return {
+                    results: _results,
+                    pagination: {
+                      more: (params.page ? (params.page * 20) : 20) < data.count
+                    }
+                  };
+                }
+              },
+              width: '100%'
+            });
+
+            if(_user_data.Grupo && _user_data.Grupo.nome){
+              var $option = $("<option selected></option>").val( _user_data.Grupo.idgrupo).text( _user_data.Grupo.nome);
+              $("#grupo_altera_usuario").append($option).trigger('change');
+            }
+
+
             $('#nome_altera_usuario').val(data.nome);
-            $('#cargo_altera_usuario').val(data.cargo_idcargo);
+            // $('#cargo_altera_usuario').val(data.cargo_idcargo);
             $('#nascimento_altera_usuario').val( $.Geral.retornaData(data.nascimento));
             $('#email_altera_usuario').val(data.email);
             $('#telefone_altera_usuario').val(data.telefone);
-            $('#grupo_altera_usuario').val(data.grupo_idgrupo);
+            // $('#grupo_altera_usuario').val(data.grupo_idgrupo);
             $('#usuario_altera_usuario').val(data.usuario);
             $('#ativo_altera_usuario').val(data.ativo + "");
             $(".atualiza_usuario").attr('action', 'usuarios/' + data.idusuario);
@@ -625,6 +848,12 @@ $.Gerencia = {
       if($('.filtro-body[contexto="'+ _contexto +'"]').hasClass('open')){
         if(_contexto === "grupos"){
           $.Gerencia.Grupos.carregaFiltros();
+        }
+        else if(_contexto === "usuarios"){
+          $.Gerencia.Usuarios.carregaFiltros();
+        }
+        else if(_contexto === "cargos"){
+          $.Gerencia.Cargos.carregaFiltros();
         }
       }
     }); 
