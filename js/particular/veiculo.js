@@ -1,23 +1,89 @@
 $.Veiculo = {};
 
 $.Veiculo = {
+  carregaVeiculosImagem: function(){
+    $.each($('.veiculo-body .card-veiculo'), function(k, v){
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', url + "veiculos_imagem?idveiculo=" + $(v).attr('id_veiculo') + "&contexto=imagem", true);
+      xhr.setRequestHeader("Authorization", 'Bearer ' + $.Model.getCookie('token'));
+      xhr.responseType = 'blob';
+      
+      xhr.onload = function(e) {
+        if (this.status == 200) {
+          // get binary data as a response
+          var blob = this.response;
+          var url = new URL(this.responseURL);
+          var id = url.searchParams.get("idveiculo");
+          const imageUrl = URL.createObjectURL(blob);
+          var img = document.createElement("img");
+          img.setAttribute('src', imageUrl);
+          img.setAttribute('alt', 'na');
+          img.style.maxWidth = '100%';
+          $('.veiculo-body .card-veiculo[id_veiculo="'+ id +'"] .img').html(img);
+        }
+      };
+      
+      xhr.send();
+    });
+  },
+
   carrega: function(){
     $.ModelVeiculos.carregaVeiculos({}, function(data){
       var _html = "";
       $.each(data, function(k, v){
-        _html += "<tr id_veiculo='" + v.idveiculo + "'>";
-        _html += "  <td></td>";
-        _html += "  <td>"+ v.idveiculo +"</td>";
-        _html += "  <td>"+ v.marca +"</td>";
-        _html += "  <td>"+ v.modelo +"</td>";
-        _html += "  <td>"+ v.capacidade +"</td>";
-        _html += "  <td>"+ v.rodagem +"</td>";
-        _html += "  <td>"+ (v.Usuarios.length > 0 ? v.Usuarios[0].nome : '---') +"</td>";
-        _html += '  <td class="text-center"><i class="fas fa-trash-alt text-danger" id_veiculo="'+ v.idveiculo +'"></i></td>';
-        _html += "</tr>";
+        // _html += "<tr id_veiculo='" + v.idveiculo + "'>";
+        // _html += "  <td class='text-center'></td>";
+        // _html += "  <td>"+ v.idveiculo +"</td>";
+        // _html += "  <td>"+ v.marca +"</td>";
+        // _html += "  <td>"+ v.modelo +"</td>";
+        // _html += "  <td>"+ v.capacidade +"</td>";
+        // _html += "  <td>"+ v.rodagem +"</td>";
+        // _html += "  <td>"+ (v.Usuarios.length > 0 ? v.Usuarios[0].nome : '---') +"</td>";
+        // _html += '  <td class="text-center"><i class="fas fa-trash-alt text-danger" id_veiculo="'+ v.idveiculo +'"></i></td>';
+        // _html += "</tr>";
+        _html += '<div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">';
+        _html += '  <div class="card card-veiculo" id_veiculo="' + v.idveiculo + '">';
+        _html += '    <div class="card-content">';
+        _html += '      <div class="card-body">';
+        _html += '        <div class="row">';
+        _html += '          <div class="col-md-5 col-lg-5 img" align="center">';
+        _html += '          </div>';
+        _html += '          <div class=" col-md-7 col-lg-7 ">';
+        _html += '            <div>';
+        _html += '              <small>PLACA:</small>';
+        _html += '              <p>'+ v.placa +'</p>';
+        _html += '            </div>';
+        _html += '            <div>';
+        _html += '              <small>MARCA:</small>';
+        _html += '              <p>'+ v.marca +'</p>';
+        _html += '            </div>';
+        _html += '            <div>';
+        _html += '              <small>MODELO:</small>';
+        _html += '              <p>'+ v.modelo +'</p>';
+        _html += '            </div>';
+        _html += '            <div>';
+        _html += '              <small>CAPACIDADE (Ton):</small>';
+        _html += '              <p>'+ v.capacidade +'</p>';
+        _html += '            </div>';
+        _html += '            <div>';
+        _html += '              <small>RODAGEM (Km):</small>';
+        _html += '              <p>'+ v.rodagem +'</p>';
+        _html += '            </div>';
+        _html += '            <div>';
+        _html += '              <small>USUÁRIO:</small>';
+        _html += '              <p>'+ (v.Usuarios.length > 0 ? v.Usuarios[0].nome : '---') +'</p>';
+        _html += '            </div>';     
+        _html += '          </div>';
+        _html += '        </div>';
+        _html += '      </div>';
+        _html += '    </div>';
+        _html += '  </div>';
+        _html += '</div>';
       });
 
-      $('.table-veiculos tbody').html(_html);
+      $('.veiculo-body .cards').html(_html);
+
+      $.Veiculo.carregaVeiculosImagem();
     });
   },
 
@@ -55,12 +121,49 @@ $.Veiculo = {
       $('#modalInsereVeiculo').modal('show');
       $('#placa_insere_veiculo').mask('SSS-0000');
 
-      $.Model.carregaUsuarios({contexto: "cria_veiculos"}, function(data){
-        var _html = "";
-        $.each(data, function(k, v){
-          _html += '<option value="'+ v.idusuario +'">'+ v.nome +'</option>';
-        });
-        $('#usuario_insere_veiculo').html(_html);
+      // $.Model.carregaUsuarios({contexto: "cria_veiculos"}, function(data){
+      //   var _html = "";
+      //   $.each(data, function(k, v){
+      //     _html += '<option value="'+ v.idusuario +'">'+ v.nome +'</option>';
+      //   });
+      //   $('#usuario_insere_veiculo').html(_html);
+      // });
+
+      $("#usuario_insere_veiculo").select2({
+        theme: "bootstrap",
+        dropdownParent: $('#modalInsereVeiculo'),
+        ajax: {
+          url: url + "usuarios",
+          dataType: 'json',
+          headers: {
+            Authorization: 'Bearer ' + $.Model.getCookie('token'),
+            "Content-Type" : "application/json",
+          },
+          data: function (params) {
+            var query = {
+              contexto: "cria_veiculos",
+              search: params.term ? {nome: params.term} : {},
+              page: params.page || 1
+            }
+            return query;
+          },
+          processResults: function (data, params) {
+            var _results = [];
+            if(!params.page || params.page === 1)
+              _results.push({id: '', text: 'Selecione'});
+  
+            $.each(data.rows, function(k, v){
+              _results.push({id: v.idusuario, text: v.nome});
+            }); 
+            return {
+              results: _results,
+              pagination: {
+                more: (params.page ? (params.page * 20) : 20) < data.count
+              }
+            };
+          }
+        },
+        width: '100%'
       });
     });
 
@@ -97,7 +200,8 @@ $.Veiculo = {
           contentType: false,
           processData: false,
           success: function(data) {
-            
+            $('#modalInsereVeiculo').modal('hide');
+            $('.sidenav .veiculo').trigger('click');
           },
           error: function(data) {
             $.Model.erro(data);

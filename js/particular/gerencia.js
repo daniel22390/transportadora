@@ -240,7 +240,7 @@ $.Gerencia = {
         $('#grupo_altera_descricao').val(data.descricao);
         var _html = "";
         $.each(data.Permissoes, function(k, v){
-          _html += '<tr idpermissao="'+ v.idpermissao +'"><td>'+ v.descricao +'</td><td class="text-center"><i class="fas fa-trash-alt fa-2x text-danger delete-permissao"></i></td></tr>';
+          _html += '<tr idpermissao="'+ v.idpermissao +'"><td>'+ v.descricao +'</td><td class="text-center"><i class="fas fa-trash-alt fa-1x text-danger delete-permissao"></i></td></tr>';
         });
         $('.tabela-add-permissao tbody').prepend(_html);
       });
@@ -828,13 +828,13 @@ $.Gerencia = {
     $('body').on('click', '.insere-permissao', function(ev){
       var _id = $('#select-permissao').val();
       var _descricao = $('#select-permissao [value="'+ _id +'"]').text();
-      $('.tabela-insere-permissao').prepend('<tr idpermissao="'+ _id +'"><td>'+ _descricao +'</td><td class="text-center"><i class="fas fa-trash-alt fa-2x text-danger delete-permissao"></i></td></tr>')
+      $('.tabela-insere-permissao').prepend('<tr idpermissao="'+ _id +'"><td>'+ _descricao +'</td><td class="text-center"><i class="fas fa-trash-alt fa-1x text-danger delete-permissao"></i></td></tr>')
     });
 
     $('body').on('click', '.insere-permissao-altera', function(ev){
       var _id = $('#altera-permissao-grupo').val();
       var _descricao = $('#altera-permissao-grupo [value="'+ _id +'"]').text();
-      $('.tabela-add-permissao ').prepend('<tr idpermissao="'+ _id +'"><td>'+ _descricao +'</td><td class="text-center"><i class="fas fa-trash-alt fa-2x text-danger delete-permissao"></i></td></tr>')
+      $('.tabela-add-permissao ').prepend('<tr idpermissao="'+ _id +'"><td>'+ _descricao +'</td><td class="text-center"><i class="fas fa-trash-alt fa-1x text-danger delete-permissao"></i></td></tr>')
     });
 
     $('body').on('click', '.delete-permissao', function(ev){

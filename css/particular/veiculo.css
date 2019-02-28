@@ -1,0 +1,32 @@
+.card-veiculos{
+    padding: 10px;
+    margin-top: 10px;
+    margin-right: 10px;
+    height: calc(100vh - 90px);
+}
+
+.add_veiculo, .filtro_veiculo{
+    right: 25px;
+    position: absolute;
+    bottom: 20px;
+    background-color: #27293d;
+    color: #ffffff;
+}
+
+.filtro_veiculo{
+    right: 70px;
+}
+
+.table-veiculos td:nth-child(1), .table-veiculos th:nth-child(1){
+    width: 230px;
+}
+
+.veiculo-body .cards{
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+}
+
+.card-veiculo p{
+    font-size: 13px;
+    margin-bottom: 10px;
+}

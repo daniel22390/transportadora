@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="./css/particular/home.css">
     <link rel="stylesheet" href="./css/particular/usuario.css">
     <link rel="stylesheet" href="./css/particular/gerencia.css">
+    <link rel="stylesheet" href="./css/particular/veiculo.css">
     <title>TRANSPORTE | HOME</title>
   </head>
   <body>
@@ -619,42 +620,28 @@
           </div>
         </div>
         <div class="veiculo-body">
-          <div style='height: 90%; overflow-y: AUTO;'>
-            <table class="table table-striped table-veiculos">
-              <thead>
-                <tr>
-                  <th scope="col" class="text-center">Imagem</th>
-                  <th scope="col">ID</th>
-                  <th scope="col">Marca</th>
-                  <th scope="col">Modelo</th>
-                  <th scope="col">Capacidade</th>
-                  <th scope="col">Rodagem</th>
-                  <th scope="col">Usuário</th>
-                  <th scope="col" class=" text-center">Ação</th>
-                </tr>
-              </thead>
-              <tbody>
-                <!-- <tr>
-                  <td class="text-center"><img class="rounded" src="./img/scania.jpg" width="120" height="120"></td>
-                  <td>1</td>
-                  <td>Scania</td>
-                  <td>G-400 6x2</td>
-                  <td>3 toneladas</td>
-                  <td>100.000km</td>
-                  <td class="text-center"><i class="fas fa-trash-alt text-danger"></i></td>
-                </tr>
-                <tr>
-                  <td class="text-center"><img class="rounded" src="./img/scania2.jpg" width="150" height="120"></td>
-                  <td>2</td>
-                  <td>Scania</td>
-                  <td>G380</td>
-                  <td>3.5 toneladas</td>
-                  <td>134.000km</td>
-                  <td class="text-center"><i class="fas fa-trash-alt text-danger"></i></td>
-                </tr> -->
-              </tbody>
-            </table>
-          </div>
+          <!-- <div>
+            <div class="card card-veiculos">
+              <table class="table table-striped table-veiculos">
+                <thead>
+                  <tr>
+                    <th scope="col" class="text-center">Imagem</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Marca</th>
+                    <th scope="col">Modelo</th>
+                    <th scope="col">Capacidade</th>
+                    <th scope="col">Rodagem</th>
+                    <th scope="col">Usuário</th>
+                    <th scope="col" class=" text-center">Ação</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
+          </div> -->
+
+          <div class="cards row"></div>
           <button type="button" class="btn filtro_veiculo "><i class="fas fa-filter"></i></button>
           <button type="button" class="btn add_veiculo "><i class="fas fa-plus"></i></button>
         </div>
@@ -1402,7 +1389,7 @@
                   <input type="password" class="form-control" id="senha_altera_usuario" placeholder="Senha">
                 </div>
               </div>
-              <h3 class="text-center" style="margin-top: 10px;">Localização</h3>
+              <h5 class="text-center" style="margin-top: 10px;">Localização</h5>
               <div style="width: 100%; height: 200px;" id="mapa_altera_usuario"></div>
             </div>
             <div class="modal-footer">
@@ -1436,7 +1423,7 @@
                   <input required type="text" class="form-control" id="grupo_altera_descricao" placeholder="Descrição">
                 </div>
               </div>
-              <h3 class="text-center" style="margin-top: 10px;">Permissões</h3>
+              <h5 class="text-center" style="margin-top: 10px;">Permissões</h5>
               <div style="max-height: 40vh; overflow-y: auto;">
                 <div class="table-responsive">
                   <table class="table tabela-add-permissao table-striped">
@@ -1491,7 +1478,7 @@
                   <input required type="text" class="form-control" id="grupo_insere_descricao" placeholder="Descrição">
                 </div>
               </div>
-              <h3 class="text-center" style="margin-top: 10px;">Permissões</h3>
+              <h5 class="text-center" style="margin-top: 10px;">Permissões</h5>
               <div style="max-height: 40vh; overflow-y: auto;">
                 <div class="table-responsive">
                   <table class="table tabela-insere-permissao table-striped">
