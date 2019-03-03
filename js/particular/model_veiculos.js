@@ -10,6 +10,7 @@ $.ModelVeiculos = {
   },
 
   carregaVeiculos: function(params, callback){
+    $run_veiculos = true;
     $.ajax({
       url: url + "veiculos",
       headers: {Authorization: 'Bearer ' + $.Model.getCookie('token')}, 
@@ -19,6 +20,7 @@ $.ModelVeiculos = {
     })
     .done(callback)
     .fail(function(error){
+      $run_veiculos = false;
     });
   },
 

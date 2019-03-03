@@ -1,46 +1,47 @@
+var $run_veiculos = false;
+
 $.Veiculo = {};
 
 $.Veiculo = {
   carregaVeiculosImagem: function(){
     $.each($('.veiculo-body .card-veiculo'), function(k, v){
-      var xhr = new XMLHttpRequest();
-      xhr.open('GET', url + "veiculos_imagem?idveiculo=" + $(v).attr('id_veiculo') + "&contexto=imagem", true);
-      xhr.setRequestHeader("Authorization", 'Bearer ' + $.Model.getCookie('token'));
-      xhr.responseType = 'blob';
-      
-      xhr.onload = function(e) {
-        if (this.status == 200) {
-          // get binary data as a response
-          var blob = this.response;
-          var url = new URL(this.responseURL);
-          var id = url.searchParams.get("idveiculo");
-          const imageUrl = URL.createObjectURL(blob);
-          var img = document.createElement("img");
-          img.setAttribute('src', imageUrl);
-          img.setAttribute('alt', 'na');
-          img.style.maxWidth = '100%';
-          $('.veiculo-body .card-veiculo[id_veiculo="'+ id +'"] .img').html(img);
-        }
-      };
-      
-      xhr.send();
+
+      if(!$(v).find('.img').attr('load')){
+        $(v).find('.img').attr('load', 'true');
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', url + "veiculos_imagem?idveiculo=" + $(v).attr('id_veiculo') + "&contexto=imagem", true);
+        xhr.setRequestHeader("Authorization", 'Bearer ' + $.Model.getCookie('token'));
+        xhr.responseType = 'blob';
+        
+        xhr.onload = function(e) {
+          if (this.status == 200) {
+            // get binary data as a response
+            var blob = this.response;
+            var url = new URL(this.responseURL);
+            var id = url.searchParams.get("idveiculo");
+            const imageUrl = URL.createObjectURL(blob);
+            var img = document.createElement("img");
+            img.setAttribute('src', imageUrl);
+            img.setAttribute('alt', 'na');
+            img.style.maxWidth = '100%';
+            img.style.maxheight = '270px';
+            img.style.marginBottom = '10px';
+            $('.veiculo-body .card-veiculo[id_veiculo="'+ id +'"] .img').html(img);
+          }
+        };
+        
+        xhr.send();
+      }
     });
   },
 
   carrega: function(){
-    $.ModelVeiculos.carregaVeiculos({}, function(data){
+
+    $('.veiculo-body').attr('page', parseInt($('.veiculo-body').attr('page')) + 1);
+
+    $.ModelVeiculos.carregaVeiculos({page: $('.veiculo-body').attr('page')}, function(data){
       var _html = "";
-      $.each(data, function(k, v){
-        // _html += "<tr id_veiculo='" + v.idveiculo + "'>";
-        // _html += "  <td class='text-center'></td>";
-        // _html += "  <td>"+ v.idveiculo +"</td>";
-        // _html += "  <td>"+ v.marca +"</td>";
-        // _html += "  <td>"+ v.modelo +"</td>";
-        // _html += "  <td>"+ v.capacidade +"</td>";
-        // _html += "  <td>"+ v.rodagem +"</td>";
-        // _html += "  <td>"+ (v.Usuarios.length > 0 ? v.Usuarios[0].nome : '---') +"</td>";
-        // _html += '  <td class="text-center"><i class="fas fa-trash-alt text-danger" id_veiculo="'+ v.idveiculo +'"></i></td>';
-        // _html += "</tr>";
+      $.each(data.rows, function(k, v){
         _html += '<div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">';
         _html += '  <div class="card card-veiculo" id_veiculo="' + v.idveiculo + '">';
         _html += '    <div class="card-content">';
@@ -81,16 +82,61 @@ $.Veiculo = {
         _html += '</div>';
       });
 
-      $('.veiculo-body .cards').html(_html);
+      $('.veiculo-body .cards').append(_html);
+
+      $('.veiculo-body .total').text( $('.veiculo-body .card-veiculo').length);
+      $('.veiculo-body .parcial').text(data.count);
 
       $.Veiculo.carregaVeiculosImagem();
+
+      $run_veiculos = false;
+
+      if(data.rows.length > 0 && ($('.cards').height() - $('.veiculo-body').height() - 30) < $('.veiculo-body').scrollTop() &&
+        $('.veiculo-body .total').text() !== $('.veiculo-body .parcial').text()){
+        $.Veiculo.carrega();
+      }
+      else if(($('.cards').height() - ($('.veiculo-body').height() +  $('.veiculo-body').scrollTop())) < 340 && data.rows.length > 0 &&
+        $('.veiculo-body .total').text() !== $('.veiculo-body .parcial').text()){
+        if($(window).width() >= 768 && $(window).width() < 1200 && $('.card.card-veiculo').length % 2 !== 0 && data.rows.length > 0){
+          $.Veiculo.carrega();
+        }
+        else if($(window).width() >= 1200 && $('.card.card-veiculo').length % 3 !== 0 && data.rows.length > 0){
+          $.Veiculo.carrega();
+        }
+      }
     });
   },
 
   events: function(){
 
     $('body').on('click', '.veiculo', function(ev){
+      $('.veiculo-body').attr('page', '0');
+      $('.veiculo-body .cards').html('<div class="col-sm-12">'+
+        '<div class="card" style="min-height: 10px;">'+
+          '<div class="card-content">'+
+            '<div class="card-body" style="padding: 7px; font-weight: bold;">'+
+              '<div class="text-center count-veiculos">Exibindo <span class="total"></span> de <span class="parcial"></span> resultados</div>'+
+            '</div>'+
+          '</div>'+
+        '</div>'+
+      '</div>');
       $.Veiculo.carrega();
+    });
+
+    $('.veiculo-body').on('scroll', function(ev){
+      if(($('.cards').height() - $('.veiculo-body').height() - 30) < $('.veiculo-body').scrollTop() && !$run_veiculos &&
+        $('.veiculo-body .total').text() !== $('.veiculo-body .parcial').text()){
+        $.Veiculo.carrega();
+      }
+      else if(($('.cards').height() - ($('.veiculo-body').height() +  $('.veiculo-body').scrollTop())) < 340 && !$run_veiculos &&
+        $('.veiculo-body .total').text() !== $('.veiculo-body .parcial').text()){
+        if($(window).width() >= 768 && $(window).width() < 1200 && $('.card.card-veiculo').length % 2 !== 0 && !$run_veiculos > 0){
+          $.Veiculo.carrega();
+        }
+        else if($(window).width() >= 1200 && $('.card.card-veiculo').length % 3 !== 0 && !$run_veiculos){
+          $.Veiculo.carrega();
+        }
+      }
     });
 
 
