@@ -39,3 +39,13 @@
 .card-veiculo .card-body{
     min-height: 280px;
 } 
+
+.btn.small{
+    font-size: 12px;
+    padding: 4px 12px;
+    line-height: 12px;
+}
+
+.card-veiculo{
+    cursor: pointer;
+}

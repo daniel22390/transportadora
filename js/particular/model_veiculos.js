@@ -24,6 +24,19 @@ $.ModelVeiculos = {
     });
   },
 
+  carregaVeiculo: function(params, callback){
+    $.ajax({
+      url: url + "veiculos/" + params.id,
+      headers: {Authorization: 'Bearer ' + $.Model.getCookie('token')}, 
+      method: "get",
+      crossDomain: true,
+      data: {}
+    })
+    .done(callback)
+    .fail(function(error){
+    });
+  },
+
   carregaVeiculosImagem: function(params, callback){
     $.ajax({
       url: url + "veiculos_imagem",

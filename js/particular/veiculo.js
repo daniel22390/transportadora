@@ -14,19 +14,31 @@ $.Veiculo = {
         xhr.responseType = 'blob';
         
         xhr.onload = function(e) {
-          if (this.status == 200) {
-            // get binary data as a response
-            var blob = this.response;
-            var url = new URL(this.responseURL);
-            var id = url.searchParams.get("idveiculo");
-            const imageUrl = URL.createObjectURL(blob);
-            var img = document.createElement("img");
-            img.setAttribute('src', imageUrl);
-            img.setAttribute('alt', 'na');
-            img.style.maxWidth = '100%';
-            img.style.maxheight = '270px';
-            img.style.marginBottom = '10px';
-            $('.veiculo-body .card-veiculo[id_veiculo="'+ id +'"] .img').html(img);
+          if (this.readyState === 4) { 
+            if (this.status == 200) {
+              // get binary data as a response
+              var blob = this.response;
+              var url = new URL(this.responseURL);
+              var id = url.searchParams.get("idveiculo");
+              const imageUrl = URL.createObjectURL(blob);
+              var img = document.createElement("img");
+              img.setAttribute('src', imageUrl);
+              img.setAttribute('alt', 'na');
+              img.style.maxWidth = '100%';
+              img.style.maxheight = '270px';
+              img.style.marginBottom = '10px';
+              $('.veiculo-body .card-veiculo[id_veiculo="'+ id +'"] .img').prepend(img);
+            } else {  
+              var url = new URL(this.responseURL);
+              var id = url.searchParams.get("idveiculo");
+              var img = document.createElement("img");
+              img.setAttribute('src', 'img/notfound.png');
+              img.setAttribute('alt', 'na');
+              img.style.maxWidth = '100%';
+              img.style.maxheight = '270px';
+              img.style.marginBottom = '10px';
+              $('.veiculo-body .card-veiculo[id_veiculo="'+ id +'"] .img').prepend(img);
+            } 
           }
         };
         
@@ -109,6 +121,62 @@ $.Veiculo = {
 
   events: function(){
 
+    $('body').on('click', '.card-veiculo', function(ev){
+      var _id = $(this).attr('id_veiculo');
+      $('#modalAlteraVeiculo').modal();
+      $('#modalAlteraVeiculo').modal('show');
+      $.ModelVeiculos.carregaVeiculo({id: _id}, function(data){
+        $('#form-altera-veiculo').attr('id_veiculo', data.idveiculo);
+        $('#placa_altera_veiculo').val(data.placa);
+        $('#capacidade_altera_veiculo').val(data.capacidade);
+        $('#rodagem_altera_veiculo').val(data.rodagem);
+        $('#marca_altera_veiculo').val(data.marca);
+        $('#modelo_altera_veiculo').val(data.modelo);
+
+        $("#usuario_altera_veiculo").select2({  
+          theme: "bootstrap",
+          dropdownParent: $('#modalAlteraVeiculo'),
+          ajax: {
+            url: url + "usuarios",
+            dataType: 'json',
+            headers: {
+              Authorization: 'Bearer ' + $.Model.getCookie('token'),
+              "Content-Type" : "application/json",
+            },
+            data: function (params) {
+              var query = {
+                contexto: "cria_veiculos",
+                search: params.term ? {nome: params.term} : {},
+                page: params.page || 1
+              }
+              return query;
+            },
+            processResults: function (data, params) {
+              var _results = [];
+              if(!params.page || params.page === 1)
+                _results.push({id: '', text: 'Selecione'});
+    
+              $.each(data.rows, function(k, v){
+                _results.push({id: v.idusuario, text: v.nome});
+              }); 
+              return {
+                results: _results,
+                pagination: {
+                  more: (params.page ? (params.page * 20) : 20) < data.count
+                }
+              };
+            }
+          },
+          width: '100%'
+        });
+
+        if(data.Usuarios.length > 0){
+          var $option = $("<option selected></option>").val(data.Usuarios[0].idusuario).text( data.Usuarios[0].nome);
+          $("#usuario_altera_veiculo").append($option).trigger('change');
+        }
+      });
+    });
+
     $('body').on('click', '.veiculo', function(ev){
       $('.veiculo-body').attr('page', '0');
       $('.veiculo-body .cards').html('<div class="col-sm-12">'+
@@ -167,6 +235,8 @@ $.Veiculo = {
       $('#modalInsereVeiculo').modal('show');
       $('#placa_insere_veiculo').mask('SSS-0000');
 
+      $('#modalInsereVeiculo input').val('');
+
       // $.Model.carregaUsuarios({contexto: "cria_veiculos"}, function(data){
       //   var _html = "";
       //   $.each(data, function(k, v){
@@ -213,7 +283,7 @@ $.Veiculo = {
       });
     });
 
-    $('#imagem_insere_veiculo').on('change',function(e){
+    $('#imagem_insere_veiculo').on('change',function(e){  
       var fileName = e.target.files[0].name;
       $(this).next('.custom-file-label').html(fileName);
     })
@@ -222,37 +292,41 @@ $.Veiculo = {
       ev.preventDefault();
       var _this = this;
 
-      $.Model.insereVeiculo({
-        data: {
-          placa: $('#placa_insere_veiculo').val(),
-          marca: $('#marca_insere_veiculo').val(),
-          modelo: $('#modelo_insere_veiculo').val(),
-          capacidade: $('#capacidade_insere_veiculo').val(),
-          rodagem: $('#rodagem_insere_veiculo').val(),
-          usuarios: [$('#usuario_insere_veiculo').val()]
-        },
-        action: "veiculos"
-      }, function(data){
-        var formData = new FormData();
-        formData.append('id', data.idveiculo);
-        formData.append('imagem', document.getElementById('imagem_insere_veiculo').files[0]);
-        
-        $.ajax({
-          headers: {Authorization: 'Bearer ' + $.Model.getCookie('token')}, 
-          type: 'POST',
-          url: url + "veiculos_imagem",
-          data: formData,
-          cache: false,
-          contentType: false,
-          processData: false,
-          success: function(data) {
-            $('#modalInsereVeiculo').modal('hide');
-            $('.sidenav .veiculo').trigger('click');
-          },
-          error: function(data) {
-            $.Model.erro(data);
-          }
-        });
+      $.Gerencia.alertas.confirmacao('Confirma a inclusão desse veículo?', function(result){
+        if(result.value){
+          $.Model.insereVeiculo({
+            data: {
+              placa: $('#placa_insere_veiculo').val(),
+              marca: $('#marca_insere_veiculo').val(),
+              modelo: $('#modelo_insere_veiculo').val(),
+              capacidade: $('#capacidade_insere_veiculo').val(),
+              rodagem: $('#rodagem_insere_veiculo').val(),
+              usuarios: [$('#usuario_insere_veiculo').val()]
+            },
+            action: "veiculos"
+          }, function(data){
+            var formData = new FormData();
+            formData.append('id', data.idveiculo);
+            formData.append('imagem', document.getElementById('imagem_insere_veiculo').files[0]);
+            
+            $.ajax({
+              headers: {Authorization: 'Bearer ' + $.Model.getCookie('token')}, 
+              type: 'POST',
+              url: url + "veiculos_imagem",
+              data: formData,
+              cache: false,
+              contentType: false,
+              processData: false,
+              success: function(data) {
+                $('#modalInsereVeiculo').modal('hide');
+                $('.sidenav .veiculo').trigger('click');
+              },
+              error: function(data) {
+                $.Model.erro(data);
+              }
+            });
+          });
+        }
       });
     });
   }
